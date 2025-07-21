@@ -40,7 +40,7 @@
             />
 
         <EditText
-            android:id="@+id/passowrdEditText"
+            android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Contraseña"
@@ -62,13 +62,12 @@
 
         <Button
             android:id="@+id/loginButton"
-            android:text="Iniciar Sesión"
-            android:backgroundTint="#5A6CFF"
-            android:textColor="#FFFFFF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margimBottom="16dp"
-            />
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#5A6CFF"
+            android:text="Iniciar Sesión"
+            android:textColor="#FFFFFF" />
 
         <TextView
             android:text="¿No tienes una cuenta?"

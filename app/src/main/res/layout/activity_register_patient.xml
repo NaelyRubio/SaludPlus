@@ -5,169 +5,186 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:padding="24dp"
-        android:gravity="center_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="48dp"
+        android:paddingBottom="24dp">
 
-        <!-- Logo -->
         <ImageView
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:src="@drawable/logo_saludplus"
-            android:layout_marginBottom="8dp"
-            android:contentDescription="Logo" />
+            android:layout_width="115dp"
+            android:layout_height="49dp"
+            android:contentDescription="Logo"
+            android:src="@drawable/logo1" />
 
-        <!-- Título -->
         <TextView
-            android:text="Crear Cuenta"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#1D1D1D"
-            android:layout_marginBottom="16dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="20dp"
+            android:text="Crear Cuenta"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        <!-- Campo: Nombre -->
         <EditText
             android:id="@+id/nombreEditText"
-            android:hint="Nombre(s)"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edittext_fondo"
-            android:padding="14dp"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginBottom="12dp"
+            android:hint="Nombre(s)"
+            android:padding="14dp" />
 
-        <!-- Campo: Apellido -->
         <EditText
             android:id="@+id/apellidoEditText"
-            android:hint="Apellido(s)"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edittext_fondo"
-            android:padding="14dp"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginBottom="12dp"
+            android:hint="Apellido(s)"
+            android:padding="14dp" />
 
-        <!-- Fecha de nacimiento -->
         <EditText
             android:id="@+id/fechaNacimientoEditText"
-            android:hint="Fecha de nacimiento"
-            android:focusable="false"
-            android:inputType="none"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edittext_fondo"
-            android:padding="14dp"
             android:layout_marginBottom="12dp"
-            android:drawableEnd="@drawable/ic_arrow_drop_down" />
+            android:focusable="false"
+            android:hint="Fecha de nacimiento"
+            android:inputType="none"
+            android:padding="14dp" />
 
-        <!-- Género -->
         <Spinner
             android:id="@+id/generoSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edittext_fondo"
-            android:padding="14dp"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginBottom="12dp"
+            android:padding="14dp" />
 
-        <!-- Contraseña -->
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Correo electrónico"
+            android:inputType="textEmailAddress"
+            android:backgroundTint="#5A6CFF"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp"/>
+
         <EditText
             android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
             android:hint="Contraseña"
             android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edittext_fondo"
-            android:padding="14dp"
-            android:layout_marginBottom="12dp" />
+            android:padding="14dp" />
 
-        <!-- Confirmar contraseña -->
         <EditText
             android:id="@+id/confirmPasswordEditText"
-            android:hint="Confirmar contraseña"
-            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edittext_fondo"
-            android:padding="14dp"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginBottom="20dp"
+            android:hint="Confirmar contraseña"
+            android:inputType="textPassword"
+            android:padding="14dp" />
 
-        <!-- Texto Rol -->
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:text="Rol de usuario"
+            android:textStyle="bold"
             android:textColor="#000000"
-            android:textSize="14sp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="4dp" />
+            android:textSize="14sp" />
 
-        <!-- Selector visual de rol -->
         <RadioGroup
             android:id="@+id/rolRadioGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
             android:orientation="horizontal"
-            android:background="@drawable/rol_selector_background"
-            android:padding="4dp"
-            android:layout_marginBottom="16dp">
+            android:padding="4dp">
 
             <RadioButton
                 android:id="@+id/pacienteRadio"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:button="@null"
-                android:background="@drawable/rol_selected_left"
-                android:text="Paciente"
                 android:gravity="center"
-                android:textStyle="bold"
-                android:padding="12dp" />
+                android:padding="12dp"
+                android:text="Paciente"
+                android:textStyle="bold" />
 
             <RadioButton
                 android:id="@+id/medicoRadio"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:button="@null"
-                android:background="@drawable/rol_selected_right"
-                android:text="Médico"
                 android:gravity="center"
-                android:textStyle="bold"
-                android:padding="12dp" />
+                android:padding="12dp"
+                android:text="Médico"
+                android:textStyle="bold" />
         </RadioGroup>
 
-        <!-- Botón registrar -->
-        <Button
-            android:id="@+id/registerButton"
-            android:text="Registrarse"
-            android:textColor="#FFFFFF"
-            android:textAllCaps="false"
+        <EditText
+            android:id="@+id/especialidadEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/boton_redondo"
-            android:layout_marginBottom="12dp" />
+            android:hint="Especialidad médica"
+            android:visibility="gone"
+            android:padding="14dp"
+            android:layout_marginBottom="12dp"/>
 
-        <!-- Link para ir al login -->
-        <TextView
-            android:text="¿Ya tienes una cuenta?"
+        <EditText
+            android:id="@+id/cedulaEditText"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cédula Profesional"
+            android:inputType="number"
+            android:visibility="gone"
+            android:padding="14dp"
+            android:layout_marginBottom="12dp"/>
+
+        <EditText
+            android:id="@+id/direccionConsultorioEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Dirección del consultorio"
+            android:visibility="gone"
+            android:padding="14dp"
+            android:layout_marginBottom="24dp"/>
+
+        <Button
+            android:id="@+id/registerButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:backgroundTint="#5A6CFF"
+            android:text="Registrarse"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginTop="12dp"
+            android:text="¿Ya tienes una cuenta?"
             android:textColor="#000000" />
 
         <TextView
             android:id="@+id/loginLink"
-            android:text="¡Iniciar sesión!"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:gravity="center"
-            android:shadowColor="#000000"
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="1"
-            android:layout_marginTop="2dp"/>
-    </LinearLayout>
+            android:text="¡Iniciar sesión!"
+            android:textColor="#5A6CFF"
+            android:textStyle="bold" />
 
+    </LinearLayout>
 </ScrollView>
