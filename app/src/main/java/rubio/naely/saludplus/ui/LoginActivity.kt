@@ -5,17 +5,19 @@ import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import rubio.naely.saludplus.MainActivity
 import rubio.naely.saludplus.R
 
 class LoginActivity : AppCompatActivity() {
 
+    private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
+
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
     private lateinit var loginButton: Button
     private lateinit var registerLink: TextView
-
-    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +25,7 @@ class LoginActivity : AppCompatActivity() {
 
         //firebase
         auth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
 
         //Vincular vistas
         emailEditText = findViewById(R.id.emailEditText)
@@ -45,12 +48,38 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            if(password.length < 6) {
+                Toast.makeText(this, "La contraseña debe tener al menos 6 caracteres", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Toast.makeText(this, "¡Bienvenido/a!", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, MainActivity::class.java))
-                        finish()
+                         val uid = auth.currentUser?.uid
+                        if (uid != null) {
+                            db.collection("usuarios").document(uid).get()
+                                .addOnSuccessListener { document ->
+                                    val rol = document.getString("rol")
+                                    when (rol) {
+                                        "Paciente" -> {
+                                            startActivity(Intent(this, PacienteHomeActivity::class.java))
+                                            finish()
+                                        }
+                                        "Médico" -> {
+                                            startActivity(Intent(this, MedicoHomeActivity::class.java))
+                                            finish()
+                                        }
+                                        else -> {
+                                            Toast.makeText(this, "Rol no definido", Toast.LENGTH_SHORT).show()
+                                        }
+                                    }
+                                }
+                                .addOnFailureListener {
+                                    Toast.makeText(this, "Error al obtener rol", Toast.LENGTH_SHORT).show()
+                                }
+                        }
                     } else {
                         Toast.makeText(this, "Error: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                     }

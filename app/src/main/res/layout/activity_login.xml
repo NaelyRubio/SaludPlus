@@ -50,15 +50,15 @@
             android:layout_marginBottom="8dp"
             />
 
-
         <TextView
             android:text="¿Olvidaste tu contraseña?"
-            android:textColor="#5A6CFF
-"           android:textSize="14sp"
+            android:textColor="#5A6CFF"
+            android:textSize="14sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="20dp" />
+
 
         <Button
             android:id="@+id/loginButton"
