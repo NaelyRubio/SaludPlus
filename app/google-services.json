@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "540871053363",
+    "project_id": "saludplus-c2916",
+    "storage_bucket": "saludplus-c2916.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:540871053363:android:a517ba9ae8885255d01346",
+        "android_client_info": {
+          "package_name": "rubio.naely.saludplus"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvIkXmCcvNEH1VlvuMFXZTYY1NEtfIo0Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
