@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginBottom="16dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="6dp"
+    android:backgroundTint="#FFFFFF">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <!-- Imagen del doctor -->
+        <ImageView
+            android:id="@+id/imgDoctor"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="Foto del doctor"
+            android:src="@drawable/doc2"
+            android:background="@drawable/bg_doctor_round"
+            android:padding="2dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Nombre del doctor -->
+        <TextView
+            android:id="@+id/tvNombreDoctor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Dr. Hamza Tariq"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:layout_marginStart="12dp"
+            app:layout_constraintTop_toTopOf="@id/imgDoctor"
+            app:layout_constraintStart_toEndOf="@id/imgDoctor"
+            app:layout_constraintEnd_toStartOf="@id/btnVerCita" />
+
+        <!-- Especialidad -->
+        <TextView
+            android:id="@+id/tvEspecialidad"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Cardiología"
+            android:textStyle="italic"
+            android:textSize="14sp"
+            android:textColor="#888888"
+            app:layout_constraintTop_toBottomOf="@id/tvNombreDoctor"
+            app:layout_constraintStart_toStartOf="@id/tvNombreDoctor"
+            app:layout_constraintEnd_toEndOf="@id/tvNombreDoctor" />
+
+        <!-- Fecha y hora de la cita -->
+        <TextView
+            android:id="@+id/tvFechaHoraCita"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="🕒 Jueves, 10 de julio\n10:00 AM"
+            android:textSize="13sp"
+            android:textColor="#000000"
+            android:layout_marginTop="4dp"
+            app:layout_constraintTop_toBottomOf="@id/tvEspecialidad"
+            app:layout_constraintStart_toStartOf="@id/tvEspecialidad"
+            app:layout_constraintEnd_toEndOf="@id/tvEspecialidad" />
+
+        <!-- Estrella + calificación -->
+        <LinearLayout
+            android:id="@+id/layoutCalificacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_star"
+                android:tint="#FFD700" />
+
+            <TextView
+                android:id="@+id/tvCalificacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5.0"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:layout_marginStart="4dp" />
+        </LinearLayout>
+
+        <!-- Botón ver cita -->
+        <ImageButton
+            android:id="@+id/btnVerCita"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/bg_boton_flecha"
+            android:src="@drawable/arrow_forward"
+            android:scaleType="centerInside"
+            android:contentDescription="Ver cita"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

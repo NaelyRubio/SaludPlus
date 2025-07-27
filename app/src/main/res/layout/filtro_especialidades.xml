@@ -32,7 +32,6 @@
         </LinearLayout>
     </ScrollView>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,5 +54,7 @@
             android:textColor="#2F50C9"
             android:background="@android:color/transparent"
             android:layout_marginStart="16dp"/>
+
+    </LinearLayout>
 
 </LinearLayout>

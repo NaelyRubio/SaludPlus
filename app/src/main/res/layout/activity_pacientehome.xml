@@ -53,54 +53,13 @@
                     android:src="@drawable/notificacion" />
             </LinearLayout>
 
-            <!-- Buscador y filtro -->
-            <LinearLayout
+            <include
+                layout="@layout/barra_busquedafiltro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="16dp"/>
 
-                <!-- Contenedor buscador con ícono -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_buscar"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="12dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="24dp"
-                        android:contentDescription="Buscar"
-                        android:src="@drawable/search" />
-
-                    <EditText
-                        android:id="@+id/etBuscar"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@android:color/transparent"
-                        android:gravity="center_vertical"
-                        android:hint="Buscar"
-                        android:paddingStart="8dp"
-                        android:textColor="#000000"
-                        android:textColorHint="#999999" />
-                </LinearLayout>
-
-                <!-- Botón filtro -->
-                <ImageButton
-                    android:id="@+id/btnFiltro"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="8dp"
-                    android:background="@drawable/bg_boton_filtro"
-                    android:contentDescription="Filtrar"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/filtro" />
-            </LinearLayout>
 
             <!-- Título y botón "Ver más" -->
             <LinearLayout
@@ -138,7 +97,7 @@
 
             </LinearLayout>
 
-            <!-- Scroll horizontal para tarjetas -->
+            <!-- Scroll horizontal para tarjetas de especialidades -->
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -231,7 +190,6 @@
                             android:textColor="#FFFFFF"
                             android:textSize="12sp" />
                     </LinearLayout>
-
                 </LinearLayout>
             </HorizontalScrollView>
 
@@ -319,94 +277,14 @@
                     android:paddingHorizontal="24dp" />
             </LinearLayout>
 
-            <RelativeLayout
+
+            <!-- card para citas  / disponibilidad-->
+            <include
+                layout="@layout/card_doctorcita"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/bg_card_cita"
-                android:padding="12dp"
-                android:elevation="4dp">
+                android:layout_height="wrap_content" />
 
-                <!-- Imagen del doctor -->
-                <ImageView
-                    android:id="@+id/imgDoctor"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:layout_alignParentStart="true"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/doc2" />
 
-                <!-- Info del doctor -->
-                <LinearLayout
-                    android:id="@+id/contenidoCita"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@id/imgDoctor"
-                    android:layout_marginStart="12dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Dr. Hamza Tariq"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="#000000" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Cardiología"
-                        android:textSize="14sp"
-                        android:textStyle="italic"
-                        android:textColor="#888888" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="🕒 Jueves, 10 de julio\n10:00 AM"
-                        android:textSize="13sp"
-                        android:textColor="#000000"
-                        android:layout_marginTop="4dp" />
-                </LinearLayout>
-
-                <!-- Estrella + calificación -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:src="@drawable/ic_star"
-                        android:tint="#FFD700" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="5.0"
-                        android:textColor="#000000"
-                        android:textSize="12sp"
-                        android:layout_marginStart="4dp" />
-                </LinearLayout>
-
-                <!-- Botón flecha -->
-                <ImageButton
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_boton_flecha"
-                    android:src="@drawable/arrow_forward"
-                    android:scaleType="centerInside"
-                    android:contentDescription="Ver cita" />
-            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 

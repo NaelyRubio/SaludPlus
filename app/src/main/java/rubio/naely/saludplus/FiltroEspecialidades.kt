@@ -9,7 +9,7 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 
-class FiltroEspecialidadesDialog(
+class FiltroEspecialidades(
     private val especialidades: List<String>,
     private val especialidadesSeleccionadas: List<String>,
     private val onAplicarFiltro: (List<String>) -> Unit

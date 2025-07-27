@@ -3,9 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F8F6FF">
+    android:background="#F5F5FF">
 
-    <!-- Encabezado de Lista de Médicos -->
+    <!-- Encabezado -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,8 +14,7 @@
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:background="@android:color/transparent">
+        android:gravity="center_vertical">
 
         <ImageView
             android:id="@+id/btnBack"
@@ -29,7 +28,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Lista de médicos"
+            android:text="Mis citas"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#1C1B1F" />
@@ -42,10 +41,7 @@
             android:contentDescription="Notificaciones" />
     </LinearLayout>
 
-    <!-- Barra búsqueda + filtro -->
-    <include layout="@layout/barra_busquedafiltro"/>
-
-    <!-- Lista de doctores -->
+    <!-- Contenido desplazable -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -56,20 +52,46 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="16dp"
-            android:paddingBottom="24dp">
+            android:orientation="vertical">
 
-            <!-- Reutilizando tarjeta de info -->
-            <include layout="@layout/card_doctorinfo" />
-            <include layout="@layout/card_doctorinfo" />
-            <include layout="@layout/card_doctorinfo" />
-            <include layout="@layout/card_doctorinfo" />
+            <!-- Texto de recordatorio -->
+            <TextView
+                android:id="@+id/tvRecordatorio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recuerde llegar 15 min antes de la hora de su cita."
+                android:textColor="#1C1B1F"
+                android:textSize="14sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="12dp"
+                android:layout_gravity="center_horizontal" />
 
+
+            <!-- Card de cita 1 -->
+            <include layout="@layout/card_doctorcita" />
+
+            <!-- Card de cita 2 -->
+            <include layout="@layout/card_doctorcita" />
+
+            <!-- Botón Agendar cita -->
+            <Button
+                android:id="@+id/btnAgendarCita"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Agendar cita"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="32dp"
+                android:backgroundTint="#5A6BFF" />
         </LinearLayout>
     </ScrollView>
 
-    <!-- Barra navegación inferior -->
+    <!-- Barra de navegación inferior -->
     <include layout="@layout/barra_nav" />
 
 </LinearLayout>
+
+
+
+
