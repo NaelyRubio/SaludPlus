@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@drawable/db_dialog_redondeado"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filtrar Especialidades"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_marginBottom="16dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        >
+
+        <LinearLayout
+            android:id="@+id/layoutEspecialidades"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <!-- Las especialidades se deberian agregar dinamicamente desde Kootlin-->
+        </LinearLayout>
+    </ScrollView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end">
+
+        <Button
+            android:id="@+id/btnCancelarFiltro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancelar"
+            android:textColor="#FF0000"
+            android:background="@android:color/transparent"/>
+
+        <Button
+            android:id="@+id/btnAplicarFiltro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aplicar"
+            android:textColor="#2F50C9"
+            android:background="@android:color/transparent"
+            android:layout_marginStart="16dp"/>
+
+</LinearLayout>

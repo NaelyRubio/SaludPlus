@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:orientation="horizontal"
+    android:background="#4D47FF"
+    android:gravity="center"
+    android:paddingHorizontal="24dp">
+
+    <!-- HOME -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/navHome"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/home"
+            android:tint="#D0D0FF" />
+    </LinearLayout>
+
+    <!-- CITAS -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/navCitas"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/calendar"
+            android:tint="#FFFFFF" />
+    </LinearLayout>
+
+    <!-- MÉDICOS -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/navMedicos"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/doctors"
+            android:tint="#FFFFFF" />
+    </LinearLayout>
+
+    <!-- PERFIL -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/navPerfil"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/perfil"
+            android:tint="#FFFFFF" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -6,7 +6,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import rubio.naely.saludplus.MainActivity
+import rubio.naely.saludplus.PacienteHomeActivity
 import rubio.naely.saludplus.R
 
 class LoginActivity : AppCompatActivity() {
@@ -88,7 +88,7 @@ class LoginActivity : AppCompatActivity() {
 
         // Link para ir a registro
         registerLink.setOnClickListener {
-            startActivity(Intent(this, RegisterPatientActivity::class.java))
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 }
