@@ -125,7 +125,7 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:background="@drawable/bg_boton_flecha"
-            android:src="@drawable/arrow_forward"
+            android:src="@drawable/bg_go"
             android:scaleType="centerInside"
             android:contentDescription="Ver doctor"
             app:layout_constraintEnd_toEndOf="parent"

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F8F9FF"
+    tools:context=".ui.HistorialCitasPacienteActivity">
+
+    <!-- Título -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tvTituloHistorial"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Historial de citas"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#1C1C1C" />
+
+        <ImageView
+            android:id="@+id/btnNotificaciones"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/notificacion"
+            android:contentDescription="Notificaciones" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/layoutSinHistorial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="24dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aún no tienes citas finalizadas o canceladas"
+            android:textColor="#888888"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+
+    <!-- Lista de citas -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvHistorialCitas"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingHorizontal="8dp"
+        android:clipToPadding="false"
+        android:scrollbars="vertical" />
+
+    <!-- Barra de navegación inferior -->
+    <include layout="@layout/barra_nav" />
+
+</LinearLayout>

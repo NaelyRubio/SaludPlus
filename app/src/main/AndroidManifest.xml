@@ -13,21 +13,33 @@
         android:theme="@style/Theme.SaludPlus"
         tools:targetApi="31">
 
-        <!-- 👇 LoginActivity ahora es la pantalla que inicia -->
-        <activity android:name=".ui.LoginActivity"
-            android:exported="true">
+        <!-- Pantalla inicial -->
+        <!-- Login y Registro -->
+        <activity android:name=".ui.LoginActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- Las otras actividades solo se registran -->
         <activity android:name=".ui.RegisterActivity" />
-        <activity android:name=".ui.MedicoHomeActivity" />
-        <activity android:name=".PacienteHomeActivity" />
 
+        <!-- Flujo Paciente -->
+        <activity android:name=".ui.PacienteHomeActivity" />
+        <activity android:name=".ListaMedicosActivity" />
+        <activity android:name=".AgendarCitaActivity" />
+        <activity android:name=".ui.MisCitasActivity" />
+        <activity android:name=".ui.PerfilPacienteActivity" />
+        <activity android:name=".EditarPerfilActivity" />
+        <activity android:name=".ui.DetalleCitaActivity" />
+
+        <!-- Flujo Médico -->
+        <activity android:name=".ui.MedicoHomeActivity" />
+
+        <!-- Generales -->
+        <activity android:name=".ui.ListaEspecialidadesActivity" />
+        <activity android:name=".NavActivity" />
         <activity android:name=".MainActivity" />
+
 
     </application>
 

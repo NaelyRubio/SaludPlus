@@ -6,7 +6,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import rubio.naely.saludplus.PacienteHomeActivity
+
 import rubio.naely.saludplus.R
 
 class LoginActivity : AppCompatActivity() {

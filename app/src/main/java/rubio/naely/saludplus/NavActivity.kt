@@ -1,38 +1,45 @@
-package rubio.naely.saludplus
+package rubio.naely.saludplus.utils
 
 import android.content.Intent
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import rubio.naely.saludplus.ListaMedicosActivity
+import rubio.naely.saludplus.R
+import rubio.naely.saludplus.ui.*
 
 open class NavActivity : AppCompatActivity() {
-    override fun onStart() {
-        super.onStart()
 
-        // HOME
-        findViewById<ImageView?>(R.id.navHome)?.setOnClickListener {
-            if (this !is PacienteHomeActivity) {
+    fun configurarNavegacionInferior(
+        navHome: ImageView,
+        navCitas: ImageView,
+        navMedicos: ImageView,
+        navPerfil: ImageView,
+        actual: String
+    ) {
+        navHome.setOnClickListener {
+            if (actual != "home") {
                 startActivity(Intent(this, PacienteHomeActivity::class.java))
             }
         }
 
-        // CITAS  Agendar cita
-        findViewById<ImageView?>(R.id.navCitas)?.setOnClickListener {
-            if (this !is AgendarCitaActivity) {
-                startActivity(Intent(this, AgendarCitaActivity::class.java))
+        navCitas.setOnClickListener {
+            if (actual != "citas") {
+                startActivity(Intent(this, MisCitasActivity::class.java))
             }
         }
 
-        // MÉDICOS  Lista de médicos
-        findViewById<ImageView?>(R.id.navMedicos)?.setOnClickListener {
-            if (this !is ListaMedicosActivity) {
+        navMedicos.setOnClickListener {
+            if (actual != "medicos") {
                 startActivity(Intent(this, ListaMedicosActivity::class.java))
             }
         }
 
-        // PERFIL  Perfil paciente
-        findViewById<ImageView?>(R.id.navPerfil)?.setOnClickListener {
-            if (this !is PerfilPacienteActivity) {
+        navPerfil.setOnClickListener {
+            if (actual != "perfil") {
                 startActivity(Intent(this, PerfilPacienteActivity::class.java))
+            } else {
+                Toast.makeText(this, "Ya estás en perfil", Toast.LENGTH_SHORT).show()
             }
         }
     }

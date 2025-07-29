@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Encabezado -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/back"
+                android:contentDescription="Volver" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Editar Perfil"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginStart="12dp" />
+        </LinearLayout>
+
+        <!-- Imagen de perfil -->
+        <ImageView
+            android:id="@+id/imgPerfil"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="24dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/perfil"
+            android:scaleType="centerCrop"
+            android:background="@drawable/bg_doctor_round"
+            android:contentDescription="Foto de perfil" />
+
+        <!-- Botón cambiar foto -->
+        <TextView
+            android:id="@+id/tvCambiarFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cambiar foto"
+            android:textColor="#6B4EA0"
+            android:textSize="14sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp" />
+
+        <!-- Campo: Nombre completo -->
+        <EditText
+            android:id="@+id/etNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre completo"
+            android:enabled="false"
+            android:textColor="#000000"
+            android:textColorHint="#888888"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="#C0C0C0"
+            android:inputType="textPersonName" />
+
+        <!-- Campo: Fecha de nacimiento -->
+        <EditText
+            android:id="@+id/etFechaNacimiento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Fecha de nacimiento"
+            android:enabled="false"
+            android:textColor="#000000"
+            android:textColorHint="#888888"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#C0C0C0"
+            android:inputType="text" />
+
+        <!-- Campo: Género -->
+        <EditText
+            android:id="@+id/etGenero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Género"
+            android:enabled="false"
+            android:textColor="#000000"
+            android:textColorHint="#888888"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#C0C0C0"
+            android:inputType="text" />
+
+        <!-- Campo: Correo electrónico -->
+        <EditText
+            android:id="@+id/etCorreo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Correo electrónico"
+            android:textColor="#000000"
+            android:textColorHint="#888888"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#6B4EA0"
+            android:inputType="textEmailAddress" />
+
+        <!-- Campo: Teléfono -->
+        <EditText
+            android:id="@+id/etTelefono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Teléfono"
+            android:textColor="#000000"
+            android:textColorHint="#888888"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#6B4EA0"
+            android:inputType="phone" />
+
+
+        <!-- Botón guardar -->
+        <Button
+            android:id="@+id/btnGuardar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guardar cambios"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:backgroundTint="#6B4EA0"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="16dp" />
+    </LinearLayout>
+
+
+</ScrollView>
