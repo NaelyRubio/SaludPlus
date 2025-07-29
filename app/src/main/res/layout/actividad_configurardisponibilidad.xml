@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!-- Contenido scrollable -->
+    <ScrollView
+        android:id="@+id/scrollContenido"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/barraNavegacion"
+        android:layout_marginBottom="70dp"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <!-- Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+
+                <ImageView
+                    android:id="@+id/btnBack"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/back"
+                    android:contentDescription="Volver" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:text="Configuración de disponibilidad"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/btnNotificaciones"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/notificacion"
+                    android:contentDescription="Notificaciones" />
+            </LinearLayout>
+
+            <!-- Subtítulo -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Días de la semana"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#666666"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Chips días -->
+            <LinearLayout
+                android:id="@+id/layoutDias"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="24dp">
+
+                <!-- Ejemplo de chip -->
+                <TextView
+                    android:id="@+id/chipLunes"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/bg_chip_dia_selected"
+                    android:gravity="center"
+                    android:text="L"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+
+            <!-- Hora inicio -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selecciona un horario de trabajo"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#666666"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="De"
+                android:textStyle="bold"
+                android:textColor="#000000" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+
+                <EditText
+                    android:id="@+id/etHoraInicio"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:inputType="time"
+                    android:hint="8:00 AM"
+                    android:padding="12dp"
+                    android:background="@drawable/bg_input" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/bg_segmented_container"
+                    android:padding="2dp"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tvAmInicio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingHorizontal="12dp"
+                        android:text="AM"
+                        android:textColor="#000000"
+                        android:background="@drawable/bg_segmented_selected"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvPmInicio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingHorizontal="12dp"
+                        android:text="PM"
+                        android:textColor="#666666"
+                        android:background="@drawable/bg_segmented_unselected" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Hora fin -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A"
+                android:textStyle="bold"
+                android:textColor="#000000" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="24dp">
+
+                <EditText
+                    android:id="@+id/etHoraFin"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:inputType="time"
+                    android:hint="8:30 AM"
+                    android:padding="12dp"
+                    android:background="@drawable/bg_input" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/bg_segmented_container"
+                    android:padding="2dp"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tvAmFin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingHorizontal="12dp"
+                        android:text="AM"
+                        android:textColor="#000000"
+                        android:background="@drawable/bg_segmented_selected"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvPmFin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingHorizontal="12dp"
+                        android:text="PM"
+                        android:textColor="#666666"
+                        android:background="@drawable/bg_segmented_unselected" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Intervalo entre citas -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tiempo por consulta"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#666666"
+                android:layout_marginBottom="8dp" />
+
+            <LinearLayout
+                android:id="@+id/layoutIntervalo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="32dp"
+                android:padding="4dp"
+                android:background="@drawable/bg_segmented_container"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:clipToOutline="true">
+
+                <Button
+                    android:id="@+id/btn30min"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="30min"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/bg_segmented_selected" />
+
+                <Button
+                    android:id="@+id/btn1hora"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="1hora"
+                    android:textColor="#666666"
+                    android:background="@drawable/bg_segmented_unselected" />
+            </LinearLayout>
+
+            <!-- Botones -->
+            <Button
+                android:id="@+id/btnAceptarDisponibilidad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Aceptar"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:padding="12dp"
+                android:background="@drawable/bg_botonamarillo"
+                android:layout_marginBottom="12dp" />
+
+            <Button
+                android:id="@+id/btnCancelarDisponibilidad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cancelar"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:padding="12dp"
+                android:background="@drawable/bg_botonrojo" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Barra de navegación inferior -->
+    <include
+        android:id="@+id/barraNavegacion"
+        layout="@layout/barra_nav"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFF" />
+</RelativeLayout>

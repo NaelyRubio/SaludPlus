@@ -21,7 +21,7 @@ class EditarPerfilActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_editarperfil)
+        setContentView(R.layout.activity_editarperfilpaciente)
 
         // Referencias de vista
         etNombre = findViewById(R.id.etNombre)

@@ -100,36 +100,37 @@
             android:textColor="#000000"
             android:textSize="14sp" />
 
-        <RadioGroup
-            android:id="@+id/rolRadioGroup"
+        <!-- Selector Rol de Usuario (Paciente / Médico) -->
+        <LinearLayout
+            android:id="@+id/selectorRol"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_margin="16dp"
+            android:padding="4dp"
+            android:background="@drawable/bg_segmented_container"
             android:orientation="horizontal"
-            android:padding="4dp">
+            android:gravity="center"
+            android:clipToOutline="true">
 
-            <RadioButton
-                android:id="@+id/pacienteRadio"
+            <Button
+                android:id="@+id/btnPaciente"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:button="@null"
-                android:gravity="center"
-                android:padding="12dp"
+                android:layout_height="40dp"
                 android:text="Paciente"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:background="@drawable/bg_segmented_selected"
+                android:textColor="#FFFFFF" />
 
-            <RadioButton
-                android:id="@+id/medicoRadio"
+            <Button
+                android:id="@+id/btnMedico"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:button="@null"
-                android:gravity="center"
-                android:padding="12dp"
+                android:layout_height="40dp"
                 android:text="Médico"
-                android:textStyle="bold" />
-        </RadioGroup>
+                android:background="@drawable/bg_segmented_unselected"
+                android:textColor="#666666" />
+        </LinearLayout>
 
         <EditText
             android:id="@+id/especialidadEditText"

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F8F6FF">
+    android:background="#FFFFFF">
 
     <!-- Encabezado de Lista de Médicos -->
     <LinearLayout
@@ -30,9 +30,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Lista de médicos"
+            android:textColor="#1C1B1F"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="#1C1B1F" />
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/btnNotificaciones"
