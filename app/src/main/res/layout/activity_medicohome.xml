@@ -1,176 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#F5F5FF"
+    tools:context=".ui.MedicoHomeActivity">
 
-    <LinearLayout
+    <!-- Contenido Scrollable -->
+    <ScrollView
+        android:id="@+id/scrollContenido"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:layout_above="@id/barraNavegacion"
+        android:fillViewport="true"
+        android:padding="24dp"
+        android:layout_marginBottom="72dp">
 
-        <!-- Header -->
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:id="@+id/imgPerfil"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/perfil"
-                android:scaleType="centerCrop"
-                android:contentDescription="Foto de perfil" />
-
-            <TextView
-                android:id="@+id/tvSaludo"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_weight="1"
-                android:text="Hola Dra. Alma !"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#000000" />
-
-            <ImageView
-                android:id="@+id/btnNotificaciones"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/notificacion"
-                android:contentDescription="Notificaciones" />
-        </LinearLayout>
-
-        <!-- Título Mis Citas -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="16dp"
-            android:paddingBottom="8dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/calendar"
-                android:contentDescription="Calendario" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Mis Citas"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="#000000" />
-        </LinearLayout>
-
-        <!-- Selector Día / Semana -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:padding="4dp"
-            android:background="@drawable/bg_segmented_container"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:clipToOutline="true">
-
-            <Button
-                android:id="@+id/btnDia"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="40dp"
-                android:text="Día"
-                android:textStyle="bold"
-                android:background="@drawable/bg_segmented_selected"
-                android:textColor="#FFFFFF" />
-
-            <Button
-                android:id="@+id/btnSemana"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="40dp"
-                android:text="Semana"
-                android:background="@drawable/bg_segmented_unselected"
-                android:textColor="#666666" />
-        </LinearLayout>
-
-        <!-- Citas Próximas -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="8dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Próximas"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/btnVerMasProximas"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_boton_vermas"
-                android:gravity="center"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:paddingHorizontal="12dp"
-                android:text="Ver más →"
-                android:textColor="#2F50C9"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCitasProximas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="16dp"
-            android:clipToPadding="false" />
-
-        <!-- Citas Pasadas (envoltura para mostrar/ocultar dinámicamente) -->
-        <LinearLayout
-            android:id="@+id/layoutCitasPasadas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!-- Saludo y notificación -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="8dp"
-                android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp">
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/perfil"
+                    android:layout_marginEnd="12dp" />
+
+                <TextView
+                    android:id="@+id/tvSaludo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Hola Dr(a). Edgar !"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/notificacion" />
+            </LinearLayout>
+
+            <!-- Título de sección -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="12dp"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/calendar"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mis Citas"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000" />
+            </LinearLayout>
+
+            <!-- Filtro Día/Semana -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_segmented_container"
+                android:padding="4dp"
+                android:layout_marginBottom="24dp"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btnDia"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_segmented_selected"
+                    android:text="Día"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btnSemana"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_segmented_unselected"
+                    android:text="Semana"
+                    android:textColor="@color/gris_text" />
+            </LinearLayout>
+
+            <!-- Subtítulo y botón Ver más -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Pasadas"
+                    android:text="Próximas"
+                    android:textStyle="bold"
                     android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textSize="16sp" />
 
                 <Button
-                    android:id="@+id/btnVerMasPasadas"
+                    android:id="@+id/btnVerMasProximas"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_boton_vermas"
@@ -184,17 +137,42 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvCitasPasadas"
+            <!-- Lista o mensaje de vacío -->
+            <TextView
+                android:id="@+id/tvSinCitas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="16dp"
-                android:clipToPadding="false" />
+                android:text="Aún no tienes citas agendadas"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="16dp" />
+
+            <Button
+                android:id="@+id/btnRegistrarHorario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Registrar horario"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="12dp"
+                android:background="@drawable/bg_segmented_selected"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="32dp" />
+
         </LinearLayout>
+    </ScrollView>
 
-        <!-- Barra de navegación inferior -->
-        <include layout="@layout/barra_nav" />
+    <!-- Barra navegación -->
+    <include
+        android:id="@+id/barraNavegacion"
+        layout="@layout/barra_nav"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true" />
 
-    </LinearLayout>
-</ScrollView>
+</RelativeLayout>
 

@@ -1,11 +1,11 @@
 package rubio.naely.saludplus.utils
 
+import rubio.naely.saludplus.ui.PacienteHomeActivity
 import android.content.Intent
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import rubio.naely.saludplus.ListaMedicosActivity
-import rubio.naely.saludplus.R
 import rubio.naely.saludplus.ui.*
 
 open class NavActivity : AppCompatActivity() {

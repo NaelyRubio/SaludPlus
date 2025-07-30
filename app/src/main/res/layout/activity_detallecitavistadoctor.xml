@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#F5F5FF">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,6 +50,7 @@
             android:layout_marginBottom="24dp">
 
             <ImageView
+                android:id="@+id/imgPerfil"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
                 android:src="@drawable/doc2"
@@ -68,6 +69,7 @@
                 android:elevation="6dp">
 
                 <TextView
+                    android:id="@+id/tvNombrePaciente"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Juan Perez"
@@ -76,6 +78,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/tvEdadPaciente"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="28 años"
@@ -83,6 +86,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/tvSexoPaciente"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Masculino"
@@ -91,15 +95,11 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Motivo de consulta -->
-
-        <!-- Imagen receta -->
-
         <!-- Observaciones -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="2dp"
             android:background="@drawable/bg_card_cita"
             android:orientation="vertical"
             android:padding="16dp">
@@ -114,6 +114,7 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/etMotivoConsulta"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:background="@drawable/bg_input"
@@ -127,7 +128,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="76dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/bg_card_cita"
             android:gravity="center_vertical"
@@ -135,11 +136,13 @@
             android:padding="16dp">
 
             <ImageView
+                android:id="@+id/imgReceta"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginEnd="12dp"
                 android:contentDescription="Imagen receta"
                 android:src="@drawable/photo" />
+
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -166,30 +169,30 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp"
+            android:layout_height="180dp"
+            android:layout_marginBottom="24dp"
             android:background="@drawable/bg_card_cita"
-            android:layout_marginBottom="24dp">
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="Observaciones del médico"
-                android:textStyle="bold"
                 android:textColor="#000000"
                 android:textSize="14sp"
-                android:layout_marginBottom="8dp" />
+                android:textStyle="bold" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:hint="Notas finales..."
-                android:gravity="top"
                 android:background="@drawable/bg_input"
+                android:gravity="top"
+                android:hint="Notas finales..."
                 android:padding="12dp"
-                android:textSize="12sp"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                android:textSize="12sp" />
         </LinearLayout>
 
     <!-- Botón Finalizar -->

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="#F5F5FF">
 
@@ -41,6 +42,7 @@
             android:contentDescription="Notificaciones" />
     </LinearLayout>
 
+
     <!-- Contenido desplazable -->
     <ScrollView
         android:layout_width="match_parent"
@@ -66,26 +68,69 @@
                 android:layout_marginBottom="12dp"
                 android:layout_gravity="center_horizontal" />
 
-
-            <!-- Card de cita 1 -->
-            <include layout="@layout/card_doctorcita" />
-
-            <!-- Card de cita 2 -->
-            <include layout="@layout/card_doctorcita" />
-
-            <!-- Botón Agendar cita -->
-            <Button
-                android:id="@+id/btnAgendarCita"
+            <!-- Layout sin citas -->
+            <LinearLayout
+                android:id="@+id/layoutSinCitas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Agendar cita"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="32dp"
+                android:background="#FFFFFF"
+                android:layout_marginHorizontal="8dp"
                 android:layout_marginTop="24dp"
+                android:elevation="2dp"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/calendar"
+                    android:contentDescription="Sin citas" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Aún no tienes citas agendadas"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="16dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Agenda tu primera cita médica de forma rápida y segura"
+                    android:textColor="#888888"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_marginTop="4dp" />
+
+                <Button
+                    android:id="@+id/btnAgendarCita"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Agendar cita"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#5A6BFF"
+                    android:layout_marginTop="16dp"
+                    android:paddingHorizontal="24dp" />
+            </LinearLayout>
+
+            <!-- Contenedor dinámico de citas -->
+            <LinearLayout
+                android:id="@+id/layoutListaCitas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="32dp"
-                android:backgroundTint="#5A6BFF" />
+                android:visibility="gone" />
         </LinearLayout>
     </ScrollView>
+
+
 
     <!-- Barra de navegación inferior -->
     <include layout="@layout/barra_nav" />

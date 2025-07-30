@@ -30,14 +30,15 @@
         <activity android:name=".ui.MisCitasActivity" />
         <activity android:name=".ui.PerfilPacienteActivity" />
         <activity android:name=".EditarPerfilActivity" />
-        <activity android:name=".ui.DetalleCitaActivity" />
+        <activity android:name=".ui.DetalleCitaPacienteActivity" />
 
         <!-- Flujo Médico -->
         <activity android:name=".ui.MedicoHomeActivity" />
+        <activity android:name=".ui.DisponibilidadActivity" />
 
         <!-- Generales -->
         <activity android:name=".ui.ListaEspecialidadesActivity" />
-        <activity android:name=".NavActivity" />
+        <activity android:name=".utils.NavActivity" />
         <activity android:name=".MainActivity" />
 
 

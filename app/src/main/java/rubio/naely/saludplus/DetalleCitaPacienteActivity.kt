@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import rubio.naely.saludplus.R
 
-class DetalleCitaActivity : AppCompatActivity() {
+class DetalleCitaPacienteActivity : AppCompatActivity() {
 
     private lateinit var tvNombreDoctor: TextView
     private lateinit var tvEspecialidad: TextView
