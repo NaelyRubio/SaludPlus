@@ -5,14 +5,6 @@
     android:layout_height="match_parent"
     android:background="#F5F5FF">
 
-    <!-- Contenido scrollable -->
-    <ScrollView
-        android:id="@+id/scrollContenido"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/barraNavegacion"
-        android:layout_marginBottom="70dp"
-        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -53,39 +45,121 @@
                     android:contentDescription="Notificaciones" />
             </LinearLayout>
 
-            <!-- Subtítulo -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Días de la semana"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:textColor="#666666"
-                android:layout_marginBottom="8dp" />
-
             <!-- Chips días -->
             <LinearLayout
-                android:id="@+id/layoutDias"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_marginBottom="24dp">
+                android:background="@drawable/bg_segmented_container"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_marginBottom="24dp"
+                android:layout_marginHorizontal="16dp">
 
-                <!-- Ejemplo de chip -->
                 <TextView
-                    android:id="@+id/chipLunes"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/bg_chip_dia_selected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Selecciona los días"
                     android:gravity="center"
-                    android:text="L"
                     android:textStyle="bold"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#000000"
+                    android:layout_marginBottom="12dp" />
+
+                <!-- Chips días -->
+                <LinearLayout
+                    android:id="@+id/layoutDias"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginBottom="8dp"
+                    android:weightSum="7">
+
+                    <TextView
+                        android:id="@+id/chipDomingo"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="4dp"
+                        android:background="@drawable/bg_chip_dia_selector"
+                        android:gravity="center"
+                        android:text="D"
+                        android:textStyle="bold"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/chipLunes"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="4dp"
+                        android:background="@drawable/bg_chip_dia_selector"
+                        android:gravity="center"
+                        android:text="L"
+                        android:textStyle="bold"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/chipMartes"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="4dp"
+                        android:background="@drawable/bg_chip_dia_selector"
+                        android:gravity="center"
+                        android:text="M"
+                        android:textStyle="bold"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/chipMiercoles"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="4dp"
+                        android:background="@drawable/bg_chip_dia_selector"
+                        android:gravity="center"
+                        android:text="X"
+                        android:textStyle="bold"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/chipJueves"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="4dp"
+                        android:background="@drawable/bg_chip_dia_selector"
+                        android:gravity="center"
+                        android:text="J"
+                        android:textStyle="bold"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/chipViernes"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="4dp"
+                        android:background="@drawable/bg_chip_dia_selector"
+                        android:gravity="center"
+                        android:text="V"
+                        android:textStyle="bold"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/chipSabado"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_chip_dia_selector"
+                        android:gravity="center"
+                        android:text="S"
+                        android:textStyle="bold"
+                        android:textColor="#000000" />
+                </LinearLayout>
             </LinearLayout>
 
-            <!-- Hora inicio -->
+            <!-- Título -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -95,6 +169,7 @@
                 android:textColor="#666666"
                 android:layout_marginBottom="8dp" />
 
+            <!-- Hora inicio -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -102,56 +177,23 @@
                 android:textStyle="bold"
                 android:textColor="#000000" />
 
-            <LinearLayout
+            <!-- Hora fin -->
+            <TextView
+                android:id="@+id/etHoraInicio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/bg_input"
+                android:clickable="true"
+                android:drawableEnd="@drawable/clock"
+                android:drawablePadding="8dp"
+                android:focusable="true"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="16dp">
+                android:padding="12dp"
+                android:text="Seleccionar hora inicio"
+                android:textColor="#000000"
+                android:textSize="16sp" />
 
-                <EditText
-                    android:id="@+id/etHoraInicio"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:inputType="time"
-                    android:hint="8:00 AM"
-                    android:padding="12dp"
-                    android:background="@drawable/bg_input" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="12dp"
-                    android:background="@drawable/bg_segmented_container"
-                    android:padding="2dp"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-
-                    <TextView
-                        android:id="@+id/tvAmInicio"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:paddingHorizontal="12dp"
-                        android:text="AM"
-                        android:textColor="#000000"
-                        android:background="@drawable/bg_segmented_selected"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvPmInicio"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:paddingHorizontal="12dp"
-                        android:text="PM"
-                        android:textColor="#666666"
-                        android:background="@drawable/bg_segmented_unselected" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- Hora fin -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -159,54 +201,21 @@
                 android:textStyle="bold"
                 android:textColor="#000000" />
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/etHoraFin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:padding="12dp"
+                android:background="@drawable/bg_input"
+                android:text="Seleccionar hora fin"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:drawableEnd="@drawable/clock"
+                android:drawablePadding="8dp"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="24dp">
-
-                <EditText
-                    android:id="@+id/etHoraFin"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:inputType="time"
-                    android:hint="8:30 AM"
-                    android:padding="12dp"
-                    android:background="@drawable/bg_input" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="12dp"
-                    android:background="@drawable/bg_segmented_container"
-                    android:padding="2dp"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-
-                    <TextView
-                        android:id="@+id/tvAmFin"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:paddingHorizontal="12dp"
-                        android:text="AM"
-                        android:textColor="#000000"
-                        android:background="@drawable/bg_segmented_selected"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvPmFin"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:paddingHorizontal="12dp"
-                        android:text="PM"
-                        android:textColor="#666666"
-                        android:background="@drawable/bg_segmented_unselected" />
-                </LinearLayout>
-            </LinearLayout>
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginBottom="24dp" />
 
             <!-- Intervalo entre citas -->
             <TextView
@@ -223,7 +232,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:layout_marginBottom="32dp"
                 android:padding="4dp"
                 android:background="@drawable/bg_segmented_container"
                 android:orientation="horizontal"
@@ -246,7 +254,7 @@
                     android:layout_height="40dp"
                     android:layout_weight="1"
                     android:text="1hora"
-                    android:textColor="#666666"
+                    android:textColor="#FFFFFF"
                     android:background="@drawable/bg_segmented_unselected" />
             </LinearLayout>
 
@@ -272,7 +280,6 @@
                 android:padding="12dp"
                 android:background="@drawable/bg_botonrojo" />
         </LinearLayout>
-    </ScrollView>
 
     <!-- Barra de navegación inferior -->
     <include

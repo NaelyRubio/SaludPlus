@@ -6,12 +6,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import rubio.naely.saludplus.R
 import java.util.*
-import androidx.core.content.ContextCompat
-
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -42,7 +41,7 @@ class RegisterActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
 
-        // Vincular views
+        // Vistas
         nombreEditText = findViewById(R.id.nombreEditText)
         apellidoEditText = findViewById(R.id.apellidoEditText)
         fechaNacimientoEditText = findViewById(R.id.fechaNacimientoEditText)
@@ -59,60 +58,61 @@ class RegisterActivity : AppCompatActivity() {
         btnPaciente = findViewById(R.id.btnPaciente)
         btnMedico = findViewById(R.id.btnMedico)
 
-        // Configurar botones de rol
+        // Rol: Paciente
         btnPaciente.setOnClickListener {
             rolSeleccionado = "Paciente"
-
-            btnPaciente.setBackgroundResource(R.drawable.bg_segmented_selected)
-            btnPaciente.setTextColor(resources.getColor(android.R.color.white))
-
             btnPaciente.setBackgroundResource(R.drawable.bg_segmented_selected)
             btnPaciente.setTextColor(ContextCompat.getColor(this, android.R.color.white))
-
             btnMedico.setBackgroundResource(R.drawable.bg_segmented_unselected)
             btnMedico.setTextColor(ContextCompat.getColor(this, R.color.gris_text))
-
             especialidadEditText.visibility = View.GONE
             cedulaProfesionalEditText.visibility = View.GONE
             direccionConsultorioEditText.visibility = View.GONE
         }
 
+        // Rol: Médico
         btnMedico.setOnClickListener {
             rolSeleccionado = "Médico"
-
-            btnMedico.setBackgroundResource(R.drawable.bg_segmented_selected)
-            btnMedico.setTextColor(resources.getColor(android.R.color.white))
-
             btnMedico.setBackgroundResource(R.drawable.bg_segmented_selected)
             btnMedico.setTextColor(ContextCompat.getColor(this, android.R.color.white))
-
             btnPaciente.setBackgroundResource(R.drawable.bg_segmented_unselected)
             btnPaciente.setTextColor(ContextCompat.getColor(this, R.color.gris_text))
-
             especialidadEditText.visibility = View.VISIBLE
             cedulaProfesionalEditText.visibility = View.VISIBLE
             direccionConsultorioEditText.visibility = View.VISIBLE
         }
 
-        // Spinner básico
+        // Spinner género
         val generos = arrayOf("Seleccionar", "Masculino", "Femenino", "Otro")
         generoSpinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, generos)
 
-        // Click en registrar
-        registerButton.setOnClickListener {
-            validarCampos()
-        }
+        // Calendario
+        fechaNacimientoEditText.setOnClickListener { mostrarDatePicker() }
 
-        // Ir al login
+        // Registro
+        registerButton.setOnClickListener { validarCampos() }
+
+        // Ir a login
         loginLink.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
+    }
 
-        // Mostrar el calendario
-        fechaNacimientoEditText.setOnClickListener {
-            mostrarDataPicker()
-        }
+    private fun mostrarDatePicker() {
+        val calendar = Calendar.getInstance()
+        val datePicker = DatePickerDialog(
+            this,
+            { _, year, month, dayOfMonth ->
+                val fecha = String.format("%02d/%02d/%04d", dayOfMonth, month + 1, year)
+                fechaNacimientoEditText.setText(fecha)
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+        datePicker.datePicker.maxDate = System.currentTimeMillis()
+        datePicker.show()
     }
 
     private fun validarCampos() {
@@ -123,11 +123,9 @@ class RegisterActivity : AppCompatActivity() {
         val email = emailEditText.text.toString()
         val pass = passwordEditText.text.toString()
         val confirm = confirmPasswordEditText.text.toString()
-        val rol = rolSeleccionado
 
-        if (nombre.isEmpty() || apellido.isEmpty() || fecha.isEmpty() || genero == "Seleccionar"
-            || email.isEmpty() || pass.isEmpty() || confirm.isEmpty() || rol.isEmpty()
-        ) {
+        if (nombre.isEmpty() || apellido.isEmpty() || fecha.isEmpty() || genero == "Seleccionar" ||
+            email.isEmpty() || pass.isEmpty() || confirm.isEmpty()) {
             Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show()
             return
         }
@@ -147,34 +145,29 @@ class RegisterActivity : AppCompatActivity() {
             return
         }
 
-        if (rol == "Médico") {
-            if (especialidadEditText.text.toString().trim().isEmpty()
-                || cedulaProfesionalEditText.text.toString().trim().isEmpty()
-                || direccionConsultorioEditText.text.toString().trim().isEmpty()
-            ) {
+        if (rolSeleccionado == "Médico") {
+            if (especialidadEditText.text.toString().isEmpty() ||
+                cedulaProfesionalEditText.text.toString().isEmpty() ||
+                direccionConsultorioEditText.text.toString().isEmpty()) {
                 Toast.makeText(this, "Completa los datos del médico", Toast.LENGTH_SHORT).show()
                 return
             }
         }
 
-        registrarUsuario(email, pass, nombre, apellido, fecha, genero, rol)
+        registrarUsuario(email, pass, nombre, apellido, fecha, genero, rolSeleccionado)
     }
 
     private fun registrarUsuario(
-        email: String,
-        pass: String,
-        nombre: String,
-        apellido: String,
-        fecha: String,
-        genero: String,
-        rol: String
+        email: String, pass: String,
+        nombre: String, apellido: String,
+        fecha: String, genero: String, rol: String
     ) {
         auth.createUserWithEmailAndPassword(email, pass)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val uid = auth.currentUser?.uid ?: return@addOnCompleteListener
 
-                    val datos = mutableMapOf(
+                    val datos = mutableMapOf<String, Any>(
                         "nombre" to nombre,
                         "apellido" to apellido,
                         "fechaNacimiento" to fecha,
@@ -198,28 +191,10 @@ class RegisterActivity : AppCompatActivity() {
                         .addOnFailureListener {
                             Toast.makeText(this, "Error al guardar datos", Toast.LENGTH_SHORT).show()
                         }
-
                 } else {
                     Toast.makeText(this, "Error: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                 }
             }
     }
-
-    private fun mostrarDataPicker() {
-        val calendario = Calendar.getInstance()
-
-        val datePickerDialog = DatePickerDialog(
-            this,
-            { _, year, month, dayOfMonth ->
-                val fechaFormateada = String.format("%02d/%02d/%04d", dayOfMonth, month + 1, year)
-                fechaNacimientoEditText.setText(fechaFormateada)
-            },
-            calendario.get(Calendar.YEAR),
-            calendario.get(Calendar.MONTH),
-            calendario.get(Calendar.DAY_OF_MONTH)
-        )
-
-        datePickerDialog.datePicker.maxDate = System.currentTimeMillis()
-        datePickerDialog.show()
-    }
 }
+
