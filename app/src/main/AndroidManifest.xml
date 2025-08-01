@@ -21,16 +21,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.RegisterActivity" />
+
 
         <!-- Flujo Paciente -->
         <activity android:name=".ui.PacienteHomeActivity" />
         <activity android:name=".ListaMedicosActivity" />
         <activity android:name=".AgendarCitaActivity" />
-        <activity android:name=".ui.MisCitasActivity" />
+        <activity android:name=".MisCitasActivity" />
         <activity android:name=".ui.PerfilPacienteActivity" />
         <activity android:name=".EditarPerfilPacienteActivity" />
-        <activity android:name=".ui.DetalleCitaPacienteActivity" />
+        <activity android:name=".DetalleCitaPacienteActivity" />
+        <activity android:name=".ui.HistorialCitasPacienteActivity"/>
 
         <!-- Flujo Médico -->
         <activity android:name=".ui.MedicoHomeActivity" />

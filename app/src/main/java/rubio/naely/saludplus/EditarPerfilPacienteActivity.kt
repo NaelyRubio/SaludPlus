@@ -1,48 +1,43 @@
 package rubio.naely.saludplus
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class EditarPerfilPacienteActivity : AppCompatActivity() {
 
-    private lateinit var etNombre: EditText
-    private lateinit var etFechaNacimiento: EditText
-    private lateinit var etGenero: EditText
+    private lateinit var imgFotoPerfil: ImageView
+    private lateinit var btnCambiarFoto: TextView
     private lateinit var etCorreo: EditText
     private lateinit var etTelefono: EditText
-    private lateinit var tvCambiarFoto: TextView
     private lateinit var btnGuardar: Button
     private lateinit var btnBack: ImageView
 
+    private val auth = FirebaseAuth.getInstance()
     private val firestore = FirebaseFirestore.getInstance()
-    private var idPaciente: String? = null
+    private val idPaciente by lazy { auth.currentUser?.uid ?: "" }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_editarperfilpaciente)
 
-        // Referencias de vista
-        etNombre = findViewById(R.id.etNombre)
-        etFechaNacimiento = findViewById(R.id.etFechaNacimiento)
-        etGenero = findViewById(R.id.etGenero)
+        imgFotoPerfil = findViewById(R.id.imgPerfil)
+        btnCambiarFoto = findViewById(R.id.tvCambiarFoto)
         etCorreo = findViewById(R.id.etCorreo)
         etTelefono = findViewById(R.id.etTelefono)
-        tvCambiarFoto = findViewById(R.id.tvCambiarFoto)
         btnGuardar = findViewById(R.id.btnGuardar)
         btnBack = findViewById(R.id.btnBack)
 
-        // Recuperar ID del paciente (recomendado pasar desde PerfilPacienteActivity)
-        idPaciente = intent.getStringExtra("idPaciente")
-
-        if (idPaciente == null) {
-            Toast.makeText(this, "ID de paciente no disponible", Toast.LENGTH_SHORT).show()
-            finish()
-            return
-        }
-
         cargarDatosPaciente()
+
+        btnCambiarFoto.setOnClickListener {
+            seleccionarImagen()
+        }
 
         btnGuardar.setOnClickListener {
             guardarCambios()
@@ -54,22 +49,38 @@ class EditarPerfilPacienteActivity : AppCompatActivity() {
     }
 
     private fun cargarDatosPaciente() {
-        firestore.collection("pacientes").document(idPaciente!!)
+        if (idPaciente.isEmpty()) return
+
+        firestore.collection("usuarios").document(idPaciente)
             .get()
             .addOnSuccessListener { document ->
                 if (document.exists()) {
-                    etNombre.setText(document.getString("nombre"))
-                    etFechaNacimiento.setText(document.getString("fechaNacimiento"))
-                    etGenero.setText(document.getString("sexo"))
-                    etCorreo.setText(document.getString("correo"))
-                    etTelefono.setText(document.getString("telefono"))
-                } else {
-                    Toast.makeText(this, "No se encontraron datos", Toast.LENGTH_SHORT).show()
+                    etCorreo.setText(document.getString("email") ?: "")
+                    etTelefono.setText(document.getString("telefono") ?: "")
+
+                    val urlImagen = document.getString("foto")
+                    if (!urlImagen.isNullOrEmpty()) {
+                        Glide.with(this).load(urlImagen).into(imgFotoPerfil)
+                    }
                 }
             }
             .addOnFailureListener {
                 Toast.makeText(this, "Error al cargar datos", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    private fun seleccionarImagen() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "image/*"
+        startActivityForResult(intent, 1001)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1001 && resultCode == Activity.RESULT_OK) {
+            val uri = data?.data
+            Glide.with(this).load(uri).into(imgFotoPerfil)
+        }
     }
 
     private fun guardarCambios() {
@@ -81,19 +92,19 @@ class EditarPerfilPacienteActivity : AppCompatActivity() {
             return
         }
 
-        val datosActualizados = mapOf(
-            "correo" to nuevoCorreo,
+        val cambios = mapOf(
+            "email" to nuevoCorreo,
             "telefono" to nuevoTelefono
         )
 
-        firestore.collection("pacientes").document(idPaciente!!)
-            .update(datosActualizados)
+        firestore.collection("usuarios").document(idPaciente)
+            .update(cambios)
             .addOnSuccessListener {
-                Toast.makeText(this, "Cambios guardados correctamente", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Cambios guardados", Toast.LENGTH_SHORT).show()
                 finish()
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Error al guardar cambios", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Error al guardar", Toast.LENGTH_SHORT).show()
             }
     }
 }

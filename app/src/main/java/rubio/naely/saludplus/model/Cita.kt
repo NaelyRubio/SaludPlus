@@ -12,4 +12,5 @@ data class Cita(
     val nombrePaciente: String = "",
     val fotoPaciente: String = "",
     var timestamp: Long = 0L
+
 )

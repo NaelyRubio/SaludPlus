@@ -20,6 +20,7 @@ class PacienteHomeActivity : NavPacienteActivity() {
     private lateinit var btnFiltro: ImageView
     private lateinit var btnAgendarPrimeraCita: Button
 
+
     // Navegación inferior
     private lateinit var navHome: ImageView
     private lateinit var navCitas: ImageView
@@ -66,6 +67,7 @@ class PacienteHomeActivity : NavPacienteActivity() {
         btnVerMasCitas = findViewById(R.id.btnVerMasCitas)
         btnFiltro = findViewById(R.id.btnFiltro)
         btnAgendarPrimeraCita = findViewById(R.id.btnAgendarPrimeraCita)
+
 
         // Navegación inferior
         navHome = findViewById(R.id.navHome)
@@ -152,7 +154,6 @@ class PacienteHomeActivity : NavPacienteActivity() {
                     val hora = cita.getString("hora") ?: ""
                     val fechaHora = "$fecha · $hora"
                     val estado = cita.getString("estado") ?: "pendiente"
-                    val calificacion = cita.getDouble("calificacion") ?: 5.0
                     val citaId = cita.id
                     val fotoUrl = cita.getString("fotoDoctor")
 

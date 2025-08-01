@@ -15,6 +15,13 @@
         android:padding="16dp"
         android:gravity="center_vertical">
 
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/back"
+            android:contentDescription="Volver" />
+
         <TextView
             android:id="@+id/tvTituloHistorial"
             android:layout_width="0dp"
@@ -52,15 +59,17 @@
     </LinearLayout>
 
 
-    <!-- Lista de citas -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvHistorialCitas"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:paddingTop="8dp"
+        android:paddingBottom="16dp"
         android:paddingHorizontal="8dp"
         android:clipToPadding="false"
         android:scrollbars="vertical" />
+
 
     <!-- Barra de navegación inferior -->
     <include layout="@layout/barra_navpaciente" />

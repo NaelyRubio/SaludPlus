@@ -69,8 +69,8 @@
             android:layout_height="36dp"
             android:background="@drawable/bg_boton_flecha"
             android:src="@drawable/bg_go"
-            android:tint="@android:color/white"
             android:scaleType="centerInside"
-            android:contentDescription="Ver cita" />
+            android:contentDescription="Ver cita"
+            app:tint="@android:color/white" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

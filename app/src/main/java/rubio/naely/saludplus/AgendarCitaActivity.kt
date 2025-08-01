@@ -78,12 +78,13 @@ class AgendarCitaActivity : NavPacienteActivity() {
         FirebaseFirestore.getInstance().collection("usuarios").document(medicoId!!)
             .get()
             .addOnSuccessListener { doc ->
-                medico = doc.toObject(Medico::class.java)!!
+                medico = doc.toObject(Medico::class.java)!!.copy(id = doc.id)
                 tvNombreDoctor.text = medico.nombre
                 tvEspecialidad.text = medico.especialidad
                 Glide.with(this).load(medico.imagenUrl).into(imgDoctor)
             }
     }
+
 
     private fun cargarHorarios() {
         FirebaseFirestore.getInstance()
@@ -168,12 +169,18 @@ class AgendarCitaActivity : NavPacienteActivity() {
         val idPaciente = FirebaseAuth.getInstance().currentUser?.uid ?: return
         val db = FirebaseFirestore.getInstance()
 
+        val fecha = "2025-07-31"
+        Log.d("CITA", "Guardando cita con especialidad: ${medico.especialidad}")
+
         val cita = hashMapOf(
             "idPaciente" to idPaciente,
             "idDoctor" to medicoId,
             "nombreDoctor" to medico.nombre,
-            "fecha" to "2025-07-31", // TODO: cambiar por fecha real
+            "especialidad" to medico.especialidad,
+            "fotoDoctor" to medico.imagenUrl,
+            "fecha" to fecha,
             "hora" to horaSeleccionada,
+            "fechaHora" to "$fecha - $horaSeleccionada",
             "motivo" to motivo,
             "estado" to "pendiente"
         )
@@ -188,4 +195,7 @@ class AgendarCitaActivity : NavPacienteActivity() {
                 Toast.makeText(this, "Error al agendar", Toast.LENGTH_SHORT).show()
             }
     }
+
+
 }
+

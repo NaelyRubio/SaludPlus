@@ -1,20 +1,18 @@
 package rubio.naely.saludplus.ui
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import rubio.naely.saludplus.R
 import rubio.naely.saludplus.model.Cita
 import com.bumptech.glide.Glide
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-
+import rubio.naely.saludplus.DetalleCitaPacienteActivity
 
 class HistorialCitasAdapter(private val listaCitas: List<Cita>) :
     RecyclerView.Adapter<HistorialCitasAdapter.ViewHolder>() {
@@ -33,7 +31,6 @@ class HistorialCitasAdapter(private val listaCitas: List<Cita>) :
         return ViewHolder(vista)
     }
 
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val cita = listaCitas[position]
 
@@ -41,26 +38,35 @@ class HistorialCitasAdapter(private val listaCitas: List<Cita>) :
         holder.tvEspecialidad.text = cita.especialidad
         holder.tvEstado.text = cita.estado
 
-        // Cambia el color según el estado
+        // Cambiar color del estado
         when (cita.estado.lowercase()) {
             "completada" -> holder.tvEstado.background = ContextCompat.getDrawable(holder.itemView.context, R.drawable.bg_estado_aceptada)
-
             "cancelada" -> holder.tvEstado.background = ContextCompat.getDrawable(holder.itemView.context, R.drawable.bg_estado_cancelada)
         }
 
-        // Cargar imagen con Glide
+        // Imagen del doctor
         Glide.with(holder.itemView.context)
             .load(cita.fotoDoctor)
             .placeholder(R.drawable.doc2)
             .into(holder.imgDoctor)
 
-        // Acción del botón
+        // Acción al hacer clic en Ver Cita
         holder.btnVerCita.setOnClickListener {
-            // Aquí puedes abrir detalle de cita si quieres
+            val context = holder.itemView.context
+            val intent = Intent(context, DetalleCitaPacienteActivity::class.java)
+
+            intent.putExtra("idCita", cita.id)
+            intent.putExtra("nombreDoctor", cita.nombreDoctor)
+            intent.putExtra("especialidad", cita.especialidad)
+            intent.putExtra("fechaHora", "${cita.fecha} - ${cita.hora}")
+            intent.putExtra("motivoConsulta", cita.motivo)
+            intent.putExtra("estado", cita.estado)
+            intent.putExtra("nombrePaciente", cita.nombrePaciente)
+            intent.putExtra("fotoPaciente", cita.fotoPaciente)
+
+            context.startActivity(intent)
         }
     }
 
     override fun getItemCount(): Int = listaCitas.size
-
 }
-

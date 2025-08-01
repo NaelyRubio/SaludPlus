@@ -1,85 +1,90 @@
-package rubio.naely.saludplus.ui
+package rubio.naely.saludplus
 
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
-import rubio.naely.saludplus.R
 
 class DetalleCitaPacienteActivity : AppCompatActivity() {
 
-    private lateinit var tvNombreDoctor: TextView
-    private lateinit var tvEspecialidad: TextView
-    private lateinit var tvFechaHora: TextView
-    private lateinit var tvMotivo: TextView
-    private lateinit var tvEstado: TextView
-    private lateinit var btnCancelarCita: Button
-    private lateinit var btnBack: ImageView
-
-    private lateinit var idCita: String
-    private val firestore = FirebaseFirestore.getInstance()
+    private lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detallescitaspaciente)
+        db = FirebaseFirestore.getInstance()
 
-        // Referencias UI
-        tvNombreDoctor = findViewById(R.id.tvNombreDoctor)
-        tvEspecialidad = findViewById(R.id.tvEspecialidad)
-        tvFechaHora = findViewById(R.id.tvFechaHora)
-        tvMotivo = findViewById(R.id.tvMotivo)
-        tvEstado = findViewById(R.id.tvEstadoCita)
-        btnCancelarCita = findViewById(R.id.btnCancelar)
-        btnBack = findViewById(R.id.btnBack)
-
-        // Datos recibidos por Intent
-        idCita = intent.getStringExtra("idCita") ?: ""
-        val nombreDoctor = intent.getStringExtra("nombreDoctor") ?: ""
-        val especialidad = intent.getStringExtra("especialidad") ?: ""
+        // Recuperar datos del intent
+        val nombreDoctor = intent.getStringExtra("nombreDoctor") ?: "Nombre no disponible"
+        val especialidad = intent.getStringExtra("especialidad") ?: "Especialidad no disponible"
         val fechaHora = intent.getStringExtra("fechaHora") ?: ""
-        val motivo = intent.getStringExtra("motivoConsulta") ?: ""
         val estado = intent.getStringExtra("estado") ?: ""
+        val motivo = intent.getStringExtra("motivoConsulta") ?: ""
+        val fotoDoctor = intent.getStringExtra("fotoDoctor") ?: ""
+        val citaId = intent.getStringExtra("idCita")
 
-        // Mostrar datos
+        if (citaId.isNullOrEmpty()) {
+            Toast.makeText(this, "No se pudo abrir la cita (ID inválido)", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
+
+        Log.d("DETALLE_CITA", "Abriendo detalle de cita con ID: $citaId")
+
+        // Enlazar vistas
+        val tvNombreDoctor = findViewById<TextView>(R.id.tvNombreDoctor)
+        val tvEspecialidad = findViewById<TextView>(R.id.tvEspecialidad)
+        val tvFechaHora = findViewById<TextView>(R.id.tvFechaHora)
+        val tvEstado = findViewById<TextView>(R.id.tvEstadoCita)
+        val tvMotivo = findViewById<TextView>(R.id.tvMotivo)
+        val imgDoctor = findViewById<ImageView>(R.id.imgDoctor)
+        val btnCancelar = findViewById<Button>(R.id.btnCancelarCita)
+        val btnReprogramar = findViewById<Button>(R.id.btnReprogramar)
+
+        // Asignar datos
         tvNombreDoctor.text = nombreDoctor
         tvEspecialidad.text = especialidad
         tvFechaHora.text = fechaHora
-        tvMotivo.text = motivo
         tvEstado.text = estado
+        tvMotivo.text = motivo
 
-        // Cambiar color según estado
-        when (estado.lowercase()) {
-            "pendiente" -> tvEstado.setBackgroundResource(R.drawable.bg_estado_pendiente)
-            "aceptada" -> tvEstado.setBackgroundResource(R.drawable.bg_estado_aceptada)
-            "cancelada" -> tvEstado.setBackgroundResource(R.drawable.bg_estado_cancelada)
-        }
-
-        // Mostrar botón solo si está pendiente
-        if (estado == "pendiente") {
-            btnCancelarCita.visibility = View.VISIBLE
+        // Cargar foto del doctor
+        if (fotoDoctor.isNotEmpty()) {
+            Glide.with(this).load(fotoDoctor).into(imgDoctor)
         } else {
-            btnCancelarCita.visibility = View.GONE
+            imgDoctor.setImageResource(R.drawable.perfil)
         }
 
-        btnCancelarCita.setOnClickListener {
-            cancelarCita()
+        // Cancelar cita
+        btnCancelar.setOnClickListener {
+            AlertDialog.Builder(this)
+                .setTitle("Cancelar cita")
+                .setMessage("¿Estás segura que deseas cancelar esta cita?")
+                .setPositiveButton("Sí") { _, _ -> cancelarCita(citaId) }
+                .setNegativeButton("No", null)
+                .show()
         }
 
-        btnBack.setOnClickListener {
-            finish()
+        // Reprogramar cita
+        btnReprogramar.setOnClickListener {
+            startActivity(Intent(this, AgendarCitaActivity::class.java))
         }
     }
 
-    private fun cancelarCita() {
-        firestore.collection("citas").document(idCita)
+    private fun cancelarCita(citaId: String) {
+        db.collection("citas").document(citaId)
             .update("estado", "cancelada")
             .addOnSuccessListener {
-                Toast.makeText(this, "Cita cancelada", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Cita cancelada correctamente", Toast.LENGTH_SHORT).show()
+                setResult(RESULT_OK) // 👈 indica a MisCitasActivity que debe actualizar
                 finish()
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Error al cancelar cita", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Error al cancelar la cita", Toast.LENGTH_SHORT).show()
             }
     }
 }
