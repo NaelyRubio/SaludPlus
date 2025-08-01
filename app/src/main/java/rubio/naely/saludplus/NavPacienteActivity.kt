@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import rubio.naely.saludplus.ListaMedicosActivity
 import rubio.naely.saludplus.ui.*
 
-open class NavActivity : AppCompatActivity() {
+open class NavPacienteActivity : AppCompatActivity() {
 
     fun configurarNavegacionInferior(
         navHome: ImageView,

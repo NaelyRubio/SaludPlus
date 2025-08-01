@@ -187,8 +187,6 @@
                 </LinearLayout>
             </HorizontalScrollView>
 
-
-
             <!--Titulo: Mis citas + boton ver mas -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -282,6 +280,6 @@
         </LinearLayout>
     </ScrollView>
 
-    <include layout="@layout/barra_nav" />
+    <include layout="@layout/barra_navpaciente" />
 
 </LinearLayout>

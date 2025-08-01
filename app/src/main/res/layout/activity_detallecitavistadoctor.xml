@@ -242,7 +242,8 @@
             android:textStyle="bold" />
     </LinearLayout>
         <!-- Barra navegación inferior -->
-        <include layout="@layout/barra_nav" />
+        <include layout="@layout/barra_navmedico" />
+
     </LinearLayout>
 
 

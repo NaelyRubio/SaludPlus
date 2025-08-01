@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tvDia"
+    android:layout_width="wrap_content"
+    android:layout_height="40dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="8dp"
+    android:paddingHorizontal="16dp"
+    android:gravity="center"
+    android:text="Lunes"
+    android:textColor="#000000"
+    android:textStyle="bold"
+    android:background="@drawable/bg_chip_dia_selector" />

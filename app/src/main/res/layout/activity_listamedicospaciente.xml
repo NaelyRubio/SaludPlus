@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:background="#F5F5FF">
 
-    <!-- Encabezado de Lista de Médicos -->
+    <!-- Encabezado -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,33 +43,20 @@
     </LinearLayout>
 
     <!-- Barra búsqueda + filtro -->
-    <include layout="@layout/barra_busquedafiltro"/>
+    <include layout="@layout/barra_busquedafiltro" />
 
-    <!-- Lista de doctores -->
-    <ScrollView
+    <!-- RecyclerView para mostrar lista dinámica -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerMedicos"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:fillViewport="true"
-        android:paddingHorizontal="16dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="16dp"
-            android:paddingBottom="24dp">
-
-            <!-- Reutilizando tarjeta de info -->
-            <include layout="@layout/card_doctorinfo" />
-            <include layout="@layout/card_doctorinfo" />
-            <include layout="@layout/card_doctorinfo" />
-            <include layout="@layout/card_doctorinfo" />
-
-        </LinearLayout>
-    </ScrollView>
+        android:paddingHorizontal="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="24dp"
+        android:clipToPadding="false" />
 
     <!-- Barra navegación inferior -->
-    <include layout="@layout/barra_nav" />
+    <include layout="@layout/barra_navpaciente" />
 
 </LinearLayout>

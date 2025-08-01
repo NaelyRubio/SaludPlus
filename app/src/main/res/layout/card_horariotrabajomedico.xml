@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="6dp"
+    android:backgroundTint="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Días trabajados -->
+        <TextView
+            android:id="@+id/tvDias"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lunes, Miércoles, Viernes"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#000000" />
+
+        <!-- Horario -->
+        <TextView
+            android:id="@+id/tvHorario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="08:00 - 13:00"
+            android:textSize="15sp"
+            android:layout_marginTop="4dp"
+            android:textColor="#333333" />
+
+        <!-- Duración -->
+        <TextView
+            android:id="@+id/tvDuracion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Duración: 30 minutos"
+            android:textSize="14sp"
+            android:layout_marginTop="6dp"
+            android:textColor="#444444" />
+
+        <!-- Precio -->
+        <TextView
+            android:id="@+id/tvPrecio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Precio: $500"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginTop="6dp"
+            android:textColor="#444444" />
+
+        <!-- Botones Editar y Eliminar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:layout_marginTop="12dp">
+
+            <ImageButton
+                android:id="@+id/btnEditarHorario"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/edit"
+                android:contentDescription="Editar horario"
+                app:tint="#555555" />
+
+            <ImageButton
+                android:id="@+id/btnEliminarHorario"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/delate"
+                android:contentDescription="Eliminar horario"
+                android:layout_marginStart="8dp"
+                app:tint="#B00020" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

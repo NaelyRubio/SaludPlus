@@ -22,7 +22,7 @@ class DetalleCitaPacienteActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detallescitas)
+        setContentView(R.layout.activity_detallescitaspaciente)
 
         // Referencias UI
         tvNombreDoctor = findViewById(R.id.tvNombreDoctor)

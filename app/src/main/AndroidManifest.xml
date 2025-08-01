@@ -29,16 +29,20 @@
         <activity android:name=".AgendarCitaActivity" />
         <activity android:name=".ui.MisCitasActivity" />
         <activity android:name=".ui.PerfilPacienteActivity" />
-        <activity android:name=".EditarPerfilActivity" />
+        <activity android:name=".EditarPerfilPacienteActivity" />
         <activity android:name=".ui.DetalleCitaPacienteActivity" />
 
         <!-- Flujo Médico -->
         <activity android:name=".ui.MedicoHomeActivity" />
         <activity android:name=".ui.DisponibilidadActivity" />
+        <activity android:name=".ListHorarioMedicoActivity" />
+        <activity android:name=".ui.PerfilMedicoActivity" />
+        <activity android:name=".EditarPerfilMedicoActivity" />
+
 
         <!-- Generales -->
         <activity android:name=".ui.ListaEspecialidadesActivity" />
-        <activity android:name=".utils.NavActivity" />
+        <activity android:name=".utils.NavPacienteActivity" />
         <activity android:name=".MainActivity" />
 
 

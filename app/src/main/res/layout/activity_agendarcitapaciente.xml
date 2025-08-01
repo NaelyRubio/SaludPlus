@@ -17,12 +17,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Título con botón atrás -->
+            <!-- Encabezado -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:padding="16dp"
+                android:orientation="horizontal"
                 android:gravity="center_vertical">
 
                 <ImageView
@@ -51,8 +51,7 @@
                 android:layout_marginTop="8dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="0dp"
-                app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true">
+                app:cardPreventCornerOverlap="false">
 
                 <ImageView
                     android:id="@+id/imgDoctor"
@@ -62,7 +61,7 @@
                     android:src="@drawable/doc2" />
             </androidx.cardview.widget.CardView>
 
-            <!-- Tarjeta azul centrada -->
+            <!-- Tarjeta azul -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -79,28 +78,27 @@
                     android:id="@+id/tvNombreDoctor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dr. Ali Uzair"
+                    android:text="Dr. Nombre"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:gravity="center" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvEspecialidad"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Senior Cardiologist and Surgeon\nMirpur Medical College and Hospital"
+                    android:text="Especialidad"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp"
                     android:gravity="center"
                     android:textAlignment="center" />
             </LinearLayout>
 
-            <!-- Citas disponibles -->
+            <!-- Días disponibles -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Citas disponibles"
+                android:text="Días disponibles"
                 android:textStyle="bold"
                 android:textSize="16sp"
                 android:textColor="#000000"
@@ -111,17 +109,16 @@
                 android:id="@+id/rvDiasDisponibles"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:clipToPadding="false"
-                android:scrollbars="none" />
+                android:layout_marginTop="8dp"
+                android:paddingHorizontal="16dp"
+                android:scrollbars="none"
+                android:clipToPadding="false" />
 
-            <!-- Horario -->
+            <!-- Horarios disponibles -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Horario disponible"
+                android:text="Horarios disponibles"
                 android:textStyle="bold"
                 android:textSize="16sp"
                 android:textColor="#000000"
@@ -132,13 +129,12 @@
                 android:id="@+id/rvHorariosDisponibles"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:clipToPadding="false"
-                android:scrollbars="none" />
+                android:layout_marginTop="8dp"
+                android:paddingHorizontal="16dp"
+                android:scrollbars="none"
+                android:clipToPadding="false" />
 
-            <!-- Motivo de consulta -->
+            <!-- Motivo -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -160,7 +156,7 @@
                     android:id="@+id/etMotivo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="Por definir..."
+                    android:hint="Describe brevemente tu motivo..."
                     android:background="@android:color/transparent"
                     android:padding="16dp"
                     android:gravity="top"
@@ -204,7 +200,6 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Barra de navegación inferior -->
-    <include layout="@layout/barra_nav" />
+    <!-- Barra navegación inferior -->
+    <include layout="@layout/barra_navpaciente" />
 </LinearLayout>
-

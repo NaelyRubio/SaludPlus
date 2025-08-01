@@ -169,7 +169,7 @@
     <!-- Barra navegación -->
     <include
         android:id="@+id/barraNavegacion"
-        layout="@layout/barra_nav"
+        layout="@layout/barra_navmedico"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true" />

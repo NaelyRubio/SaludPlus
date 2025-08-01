@@ -1,65 +1,178 @@
 package rubio.naely.saludplus
 
+import Horario
+import Medico
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.util.Log
+import android.widget.*
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import rubio.naely.saludplus.utils.NavActivity
+import rubio.naely.saludplus.adapters.DiasDisponiblesAdapter
+import rubio.naely.saludplus.adapters.HorasDisponiblesAdapter
+import rubio.naely.saludplus.utils.NavPacienteActivity
 
-class AgendarCitaActivity : NavActivity() {
+class AgendarCitaActivity : NavPacienteActivity() {
 
-    private lateinit var btnCancelar: Button
-    private lateinit var btnAgendar: Button
+    private lateinit var tvNombreDoctor: TextView
+    private lateinit var tvEspecialidad: TextView
+    private lateinit var imgDoctor: ImageView
     private lateinit var etMotivo: EditText
+    private lateinit var rvDias: RecyclerView
+    private lateinit var rvHoras: RecyclerView
+    private lateinit var btnAgendar: Button
+    private lateinit var btnCancelar: Button
+
+    private var horarios: List<Horario> = emptyList()
+    private var diaSeleccionado: String? = null
+    private var horaSeleccionada: String? = null
+    private var medicoId: String? = null
+    private lateinit var medico: Medico
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_agendarcita)
+        setContentView(R.layout.activity_agendarcitapaciente)
 
-        // Referencias a los botones y campos
-        btnCancelar = findViewById(R.id.btnCancelar)
-        btnAgendar = findViewById(R.id.btnAgendar)
-        etMotivo = findViewById(R.id.etMotivo)
+        bindViews()
 
-        // Acción Cancelar
-        btnCancelar.setOnClickListener {
-            Toast.makeText(this, "Cita cancelada", Toast.LENGTH_SHORT).show()
+        medicoId = intent.getStringExtra("medicoId")
+
+        if (medicoId == null) {
+            Toast.makeText(this, "Error: No se encontró el ID del médico", Toast.LENGTH_SHORT).show()
             finish()
-        }
-
-        // Acción Agendar
-        btnAgendar.setOnClickListener {
-            val motivo = etMotivo.text.toString().trim()
-            if (motivo.isEmpty()) {
-                Toast.makeText(this, "Por favor, escribe el motivo de la consulta", Toast.LENGTH_SHORT).show()
-            } else {
-                guardarCitaEnFirestore(motivo)
-            }
-        }
-    }
-
-    private fun guardarCitaEnFirestore(motivo: String) {
-        val db = FirebaseFirestore.getInstance()
-        val uidPaciente = FirebaseAuth.getInstance().currentUser?.uid
-
-        if (uidPaciente == null) {
-            Toast.makeText(this, "No se pudo obtener el ID del paciente", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // Simulación de datos que debes recibir por Intent más adelante
-        val idDoctor = "DOCTOR_001"
-        val nombreDoctor = "Dra. Laura Torres"
-        val fechaSeleccionada = "2025-07-30"
-        val horaSeleccionada = "10:30 AM"
+        cargarDatosMedico()
+        cargarHorarios()
+
+        btnCancelar.setOnClickListener { finish() }
+
+        btnAgendar.setOnClickListener {
+            val motivo = etMotivo.text.toString().trim()
+            if (diaSeleccionado == null || horaSeleccionada == null || motivo.isEmpty()) {
+                Toast.makeText(this, "Selecciona un día, hora y escribe el motivo", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            guardarCita(motivo)
+        }
+    }
+
+    private fun bindViews() {
+        tvNombreDoctor = findViewById(R.id.tvNombreDoctor)
+        tvEspecialidad = findViewById(R.id.tvEspecialidad)
+        imgDoctor = findViewById(R.id.imgDoctor)
+        etMotivo = findViewById(R.id.etMotivo)
+        rvDias = findViewById(R.id.rvDiasDisponibles)
+        rvHoras = findViewById(R.id.rvHorariosDisponibles)
+        btnAgendar = findViewById(R.id.btnAgendar)
+        btnCancelar = findViewById(R.id.btnCancelar)
+
+        rvDias.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        rvHoras.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+    }
+
+    private fun cargarDatosMedico() {
+        FirebaseFirestore.getInstance().collection("usuarios").document(medicoId!!)
+            .get()
+            .addOnSuccessListener { doc ->
+                medico = doc.toObject(Medico::class.java)!!
+                tvNombreDoctor.text = medico.nombre
+                tvEspecialidad.text = medico.especialidad
+                Glide.with(this).load(medico.imagenUrl).into(imgDoctor)
+            }
+    }
+
+    private fun cargarHorarios() {
+        FirebaseFirestore.getInstance()
+            .collection("disponibilidad")
+            .document(medicoId!!)
+            .collection("horarios")
+            .get()
+            .addOnSuccessListener { result ->
+                horarios = result.map { it.toObject(Horario::class.java) }
+
+                val diasUnicos = horarios.flatMap { it.dias }.distinct()
+
+                rvDias.adapter = DiasDisponiblesAdapter(diasUnicos) { dia ->
+                    diaSeleccionado = dia
+                    cargarHorasParaDia(dia)
+                }
+            }
+    }
+
+    private fun cargarHorasParaDia(dia: String) {
+        Log.d("AgendarCita", "Día seleccionado: $dia")
+
+        val horasGeneradas = mutableListOf<String>()
+
+        val horariosFiltrados = horarios.filter { it.dias.contains(dia) }
+        Log.d("AgendarCita", "Horarios encontrados para $dia: ${horariosFiltrados.size}")
+
+        horariosFiltrados.forEach { horario ->
+            Log.d("AgendarCita", "Procesando horario: ${horario.horaInicio} - ${horario.horaFin}")
+            val horaInicio = convertirHora(horario.horaInicio)
+            val horaFin = convertirHora(horario.horaFin)
+            val intervalo = horario.duracion
+
+            var actual = horaInicio
+            while (actual < horaFin) {
+                val horaFormateada = formatearHora(actual)
+                horasGeneradas.add(horaFormateada)
+                Log.d("AgendarCita", "Generada: $horaFormateada")
+                actual += intervalo
+            }
+        }
+
+        // Simula fecha por ahora
+        val fecha = "2025-07-31"
+        FirebaseFirestore.getInstance().collection("citas")
+            .whereEqualTo("idDoctor", medicoId)
+            .whereEqualTo("fecha", fecha)
+            .get()
+            .addOnSuccessListener { result ->
+                val horasOcupadas = result.mapNotNull { it.getString("hora") }
+                Log.d("AgendarCita", "Horas ocupadas: $horasOcupadas")
+
+                val horasDisponibles = horasGeneradas.filter { it !in horasOcupadas }
+                Log.d("AgendarCita", "Final: ${horasDisponibles.size} horas disponibles")
+
+                rvHoras.adapter = HorasDisponiblesAdapter(horasDisponibles) { hora ->
+                    horaSeleccionada = hora
+                }
+            }
+    }
+
+
+    private fun convertirHora(hora12: String): Int {
+        val parts = hora12.split(" ", ":")
+        var h = parts[0].toInt()
+        val m = parts[1].toInt()
+        val amPm = parts[2]
+        if (amPm == "PM" && h != 12) h += 12
+        if (amPm == "AM" && h == 12) h = 0
+        return h * 60 + m
+    }
+
+    private fun formatearHora(minutos: Int): String {
+        val h = minutos / 60
+        val m = minutos % 60
+        val amPm = if (h < 12) "AM" else "PM"
+        val h12 = if (h % 12 == 0) 12 else h % 12
+        return String.format("%02d:%02d %s", h12, m, amPm)
+    }
+
+    private fun guardarCita(motivo: String) {
+        val idPaciente = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val db = FirebaseFirestore.getInstance()
 
         val cita = hashMapOf(
-            "idPaciente" to uidPaciente,
-            "idDoctor" to idDoctor,
-            "nombreDoctor" to nombreDoctor,
-            "fecha" to fechaSeleccionada,
+            "idPaciente" to idPaciente,
+            "idDoctor" to medicoId,
+            "nombreDoctor" to medico.nombre,
+            "fecha" to "2025-07-31", // TODO: cambiar por fecha real
             "hora" to horaSeleccionada,
             "motivo" to motivo,
             "estado" to "pendiente"
@@ -68,11 +181,11 @@ class AgendarCitaActivity : NavActivity() {
         db.collection("citas")
             .add(cita)
             .addOnSuccessListener {
-                Toast.makeText(this, "Cita agendada con éxito", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Cita agendada", Toast.LENGTH_SHORT).show()
                 finish()
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Error al guardar la cita", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Error al agendar", Toast.LENGTH_SHORT).show()
             }
     }
 }

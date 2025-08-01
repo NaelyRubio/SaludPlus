@@ -15,7 +15,7 @@ class ListaEspecialidadesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_listamedicos)
+        setContentView(R.layout.activity_listamedicospaciente)
 
         btnBack = findViewById(R.id.btnBack)
         layoutEspecialidades = findViewById(R.id.layoutEspecialidades)

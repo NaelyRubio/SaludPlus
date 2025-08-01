@@ -133,7 +133,7 @@
 
 
     <!-- Barra de navegación inferior -->
-    <include layout="@layout/barra_nav" />
+    <include layout="@layout/barra_navpaciente" />
 
 </LinearLayout>
 

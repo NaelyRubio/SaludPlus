@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="64dp"
     android:orientation="horizontal"
@@ -20,10 +21,10 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/home"
-            android:tint="#D0D0FF" />
+            app:tint="#D0D0FF" />
     </LinearLayout>
 
-    <!-- CITAS -->
+    <!-- REGISTRAR HORARIO -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -32,14 +33,14 @@
         android:gravity="center">
 
         <ImageView
-            android:id="@+id/navCitas"
+            android:id="@+id/navRegistroHorario"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/calendar"
-            android:tint="#FFFFFF" />
+            app:tint="#FFFFFF" />
     </LinearLayout>
 
-    <!-- MÉDICOS -->
+    <!-- HORARIOS DE TRABAJO -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -48,11 +49,11 @@
         android:gravity="center">
 
         <ImageView
-            android:id="@+id/navMedicos"
+            android:id="@+id/navhorarios"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/doctors"
-            android:tint="#FFFFFF" />
+            android:src="@drawable/clock"
+            app:tint="#FFFFFF" />
     </LinearLayout>
 
     <!-- PERFIL -->
@@ -68,7 +69,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/perfil"
-            android:tint="#FFFFFF" />
+            app:tint="#FFFFFF" />
     </LinearLayout>
 
 </LinearLayout>

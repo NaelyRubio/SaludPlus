@@ -5,7 +5,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
 
-class EditarPerfilActivity : AppCompatActivity() {
+class EditarPerfilPacienteActivity : AppCompatActivity() {
 
     private lateinit var etNombre: EditText
     private lateinit var etFechaNacimiento: EditText

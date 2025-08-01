@@ -7,9 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import rubio.naely.saludplus.EditarPerfilActivity
+import rubio.naely.saludplus.EditarPerfilPacienteActivity
 import rubio.naely.saludplus.ListaMedicosActivity
-import rubio.naely.saludplus.ui.MisCitasActivity
 import rubio.naely.saludplus.R
 
 class PerfilPacienteActivity : AppCompatActivity() {
@@ -67,7 +66,7 @@ class PerfilPacienteActivity : AppCompatActivity() {
 
     private fun configurarBotones() {
         imgEditarPerfil.setOnClickListener {
-            val intent = Intent(this, EditarPerfilActivity::class.java)
+            val intent = Intent(this, EditarPerfilPacienteActivity::class.java)
             intent.putExtra("idPaciente", idPaciente)
             startActivity(intent)
         }
