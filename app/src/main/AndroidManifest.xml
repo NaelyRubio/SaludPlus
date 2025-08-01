@@ -39,6 +39,7 @@
         <activity android:name=".ListHorarioMedicoActivity" />
         <activity android:name=".ui.PerfilMedicoActivity" />
         <activity android:name=".EditarPerfilMedicoActivity" />
+        <activity android:name=".DetalleCitaDoctorActivity" />
 
 
         <!-- Generales -->

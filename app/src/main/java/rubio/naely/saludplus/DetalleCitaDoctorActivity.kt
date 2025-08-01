@@ -17,15 +17,8 @@ class DetalleCitaDoctorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detallecitavistadoctor)
 
-        val nombreDoctor = intent.getStringExtra("nombreDoctor") ?: "Nombre no disponible"
-        val especialidad = intent.getStringExtra("especialidad") ?: "Especialidad no disponible"
-        val fechaHora = intent.getStringExtra("fechaHora") ?: ""
-        val motivoConsulta = intent.getStringExtra("motivoConsulta") ?: ""
-        val estado = intent.getStringExtra("estado") ?: ""
-
         db = FirebaseFirestore.getInstance()
 
-        // Obtener ID de cita desde intent
         val citaId = intent.getStringExtra("citaId")
         if (!citaId.isNullOrEmpty()) {
             cargarDatosCita(citaId)
@@ -46,18 +39,51 @@ class DetalleCitaDoctorActivity : AppCompatActivity() {
         db.collection("citas").document(citaId).get()
             .addOnSuccessListener { document ->
                 if (document.exists()) {
-                    tvNombre.text = document.getString("nombrePaciente") ?: "Desconocido"
-                    tvEdad.text = "${document.getLong("edadPaciente") ?: 0} años"
-                    tvSexo.text = document.getString("sexoPaciente") ?: "-"
-                    tvMotivo.setText(document.getString("motivo") ?: "Sin motivo registrado")
-                    tvEstado.text = document.getString("estado")?.replaceFirstChar { it.uppercase() } ?: "Desconocido"
+                    val motivo = document.getString("motivo") ?: "Sin motivo registrado"
+                    val estado = document.getString("estado") ?: "desconocido"
+                    tvMotivo.setText(motivo)
+                    tvEstado.text = estado.replaceFirstChar { it.uppercase() }
 
+                    val nombre = document.getString("nombrePaciente")
+                    val edad = document.getLong("edadPaciente")
+                    val sexo = document.getString("sexoPaciente")
                     val foto = document.getString("fotoPaciente")
-                    Glide.with(this)
-                        .load(foto)
-                        .placeholder(R.drawable.perfil)
-                        .error(R.drawable.perfil)
-                        .into(imgPaciente)
+                    val idPaciente = document.getString("idPaciente")
+
+                    if (!nombre.isNullOrBlank()) {
+                        tvNombre.text = nombre
+                        tvEdad.text = "${edad ?: 0} años"
+                        tvSexo.text = sexo ?: "-"
+                        Glide.with(this)
+                            .load(foto)
+                            .placeholder(R.drawable.perfil)
+                            .error(R.drawable.perfil)
+                            .into(imgPaciente)
+                    } else if (!idPaciente.isNullOrBlank()) {
+                        db.collection("usuarios").document(idPaciente).get()
+                            .addOnSuccessListener { userDoc ->
+                                val nombreUser = userDoc.getString("nombre") ?: "Desconocido"
+                                val edadUser = userDoc.getLong("edad")?.toInt() ?: 0
+                                val sexoUser = userDoc.getString("sexo") ?: "-"
+                                val fotoUrl = userDoc.getString("imagenUrl")
+
+                                tvNombre.text = nombreUser
+                                tvEdad.text = "$edadUser años"
+                                tvSexo.text = sexoUser
+
+                                Glide.with(this)
+                                    .load(fotoUrl)
+                                    .placeholder(R.drawable.perfil)
+                                    .error(R.drawable.perfil)
+                                    .into(imgPaciente)
+                            }
+                            .addOnFailureListener {
+                                Toast.makeText(this, "Error al cargar paciente", Toast.LENGTH_SHORT).show()
+                            }
+                    } else {
+                        tvNombre.text = "Paciente desconocido"
+                    }
+
                 } else {
                     Toast.makeText(this, "No se encontró la cita", Toast.LENGTH_SHORT).show()
                     finish()

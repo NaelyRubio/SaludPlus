@@ -146,7 +146,6 @@ class AgendarCitaActivity : NavPacienteActivity() {
             }
     }
 
-
     private fun convertirHora(hora12: String): Int {
         val parts = hora12.split(" ", ":")
         var h = parts[0].toInt()
@@ -165,37 +164,52 @@ class AgendarCitaActivity : NavPacienteActivity() {
         return String.format("%02d:%02d %s", h12, m, amPm)
     }
 
-    private fun guardarCita(motivo: String) {
-        val idPaciente = FirebaseAuth.getInstance().currentUser?.uid ?: return
-        val db = FirebaseFirestore.getInstance()
+private fun guardarCita(motivo: String) {
+    val idPaciente = FirebaseAuth.getInstance().currentUser?.uid ?: return
+    val db = FirebaseFirestore.getInstance()
 
-        val fecha = "2025-07-31"
-        Log.d("CITA", "Guardando cita con especialidad: ${medico.especialidad}")
+    val fecha = "2025-07-31"
+    Log.d("CITA", "Guardando cita con especialidad: ${medico.especialidad}")
 
-        val cita = hashMapOf(
-            "idPaciente" to idPaciente,
-            "idDoctor" to medicoId,
-            "nombreDoctor" to medico.nombre,
-            "especialidad" to medico.especialidad,
-            "fotoDoctor" to medico.imagenUrl,
-            "fecha" to fecha,
-            "hora" to horaSeleccionada,
-            "fechaHora" to "$fecha - $horaSeleccionada",
-            "motivo" to motivo,
-            "estado" to "pendiente"
-        )
+    // 1. Obtener nombre y foto del paciente desde Firebase
+    db.collection("usuarios").document(idPaciente)
+        .get()
+        .addOnSuccessListener { doc ->
+            val nombrePaciente = doc.getString("nombre") ?: "Paciente"
+            val fotoPaciente = doc.getString("imagenUrl") ?: ""
 
-        db.collection("citas")
-            .add(cita)
-            .addOnSuccessListener {
-                Toast.makeText(this, "Cita agendada", Toast.LENGTH_SHORT).show()
-                finish()
-            }
-            .addOnFailureListener {
-                Toast.makeText(this, "Error al agendar", Toast.LENGTH_SHORT).show()
-            }
-    }
+            // 2. Construir cita
+            val cita = hashMapOf(
+                "idPaciente" to idPaciente,
+                "idDoctor" to medicoId,
+                "nombreDoctor" to medico.nombre,
+                "especialidad" to medico.especialidad,
+                "fotoDoctor" to medico.imagenUrl,
+                "fecha" to fecha,
+                "hora" to horaSeleccionada,
+                "fechaHora" to "$fecha - $horaSeleccionada",
+                "motivo" to motivo,
+                "estado" to "pendiente",
+                "nombrePaciente" to nombrePaciente,
+                "fotoPaciente" to fotoPaciente,
+                "timestamp" to System.currentTimeMillis()
+            )
 
+
+            db.collection("citas")
+                .add(cita)
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Cita agendada", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Error al agendar", Toast.LENGTH_SHORT).show()
+                }
+        }
+        .addOnFailureListener {
+            Toast.makeText(this@AgendarCitaActivity, "No se pudo obtener info", Toast.LENGTH_SHORT).show()
+        }
 
 }
 
+}

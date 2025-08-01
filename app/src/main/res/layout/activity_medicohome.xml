@@ -150,6 +150,13 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="16dp" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCitasMedico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                />
+
             <Button
                 android:id="@+id/btnRegistrarHorario"
                 android:layout_width="wrap_content"
@@ -162,6 +169,7 @@
                 android:background="@drawable/bg_segmented_selected"
                 android:textColor="#FFFFFF"
                 android:layout_marginBottom="32dp" />
+
 
         </LinearLayout>
     </ScrollView>

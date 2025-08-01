@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.firebase.firestore.FirebaseFirestore
 import rubio.naely.saludplus.R
 import rubio.naely.saludplus.model.Cita
 
@@ -34,16 +35,43 @@ class CitasDoctorAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val cita = listaCitas[position]
 
-        holder.tvNombrePaciente.text = cita.nombrePaciente
+        val db = FirebaseFirestore.getInstance()
+        db.collection("usuarios").document(cita.idPaciente)
+            .get()
+            .addOnSuccessListener { doc ->
+                val nombrePaciente = doc.getString("nombre") ?: "Paciente"
+                val fotoPaciente = doc.getString("imagenUrl") ?: ""
+
+                holder.tvNombrePaciente.text = nombrePaciente
+
+                Glide.with(holder.itemView.context)
+                    .load(fotoPaciente)
+                    .placeholder(R.drawable.perfil)
+                    .into(holder.imgPaciente)
+            }
+            .addOnFailureListener {
+                holder.tvNombrePaciente.text = "Paciente"
+            }
+
         holder.tvMotivo.text = cita.motivo
         holder.tvEstado.text = cita.estado
 
         // Colores según estado
         when (cita.estado.lowercase()) {
-            "pendiente" -> holder.tvEstado.background = ContextCompat.getDrawable(holder.itemView.context, R.drawable.bg_estado_pendiente)
-            "aceptada" -> holder.tvEstado.background = ContextCompat.getDrawable(holder.itemView.context, R.drawable.bg_estado_aceptada)
-            "cancelada" -> holder.tvEstado.background = ContextCompat.getDrawable(holder.itemView.context, R.drawable.bg_estado_cancelada)
+            "pendiente" -> {
+                holder.tvEstado.setBackgroundColor(android.graphics.Color.TRANSPARENT)
+                holder.tvEstado.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.amarillo_oscuro))
+            }
+            "aceptada" -> {
+                holder.tvEstado.setBackgroundColor(android.graphics.Color.TRANSPARENT)
+                holder.tvEstado.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.verde_estado))
+            }
+            "cancelada" -> {
+                holder.tvEstado.setBackgroundColor(android.graphics.Color.TRANSPARENT)
+                holder.tvEstado.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.rojo_estado))
+            }
         }
+
 
         // Imagen del paciente
         Glide.with(holder.itemView.context)

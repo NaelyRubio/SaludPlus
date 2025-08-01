@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import rubio.naely.saludplus.ListHorarioMedicoActivity
 import rubio.naely.saludplus.ui.DisponibilidadActivity
 import rubio.naely.saludplus.ui.MedicoHomeActivity
+
 import rubio.naely.saludplus.ui.PerfilMedicoActivity
 
 open class NavMedicoActivity : AppCompatActivity() {
